@@ -30,9 +30,11 @@ public class QuizDAO implements DAO_Interface {
     private Statement getConnection()
             throws ClassNotFoundException, SQLException {
         try {
-            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
-            String sourceURL = new String("jdbc:odbc:olympicDB");
-            databaseConnection = DriverManager.getConnection(sourceURL, "admin", "");
+            Class.forName("com.mysql.jdbc.Driver");
+            // setup the connection with the DB.
+            databaseConnection = DriverManager
+                    .getConnection("jdbc:mysql://192.168.22.10/coursework_db?"
+                            + "user=root&password=root");
             return databaseConnection.createStatement();
         } catch (ClassNotFoundException cnfe) {
             System.out.println(cnfe);
