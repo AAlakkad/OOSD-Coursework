@@ -11,18 +11,18 @@ import java.sql.*;
  *
  * @author ammar
  */
-public class QuizDAO implements DAO_Interface {
+public class DAO implements DAO_Interface {
 
     // Singleton object
-    private static QuizDAO theQuizDAO;
+    private static DAO theQuizDAO;
     private Connection databaseConnection;
 
-    private QuizDAO() {
+    private DAO() {
     }
 
-    public static QuizDAO getQuizDAO() {
+    public static DAO getQuizDAO() {
         if (theQuizDAO == null) {
-            theQuizDAO = new QuizDAO();
+            theQuizDAO = new DAO();
         }
         return theQuizDAO;
     }
