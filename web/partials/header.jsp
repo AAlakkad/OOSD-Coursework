@@ -24,13 +24,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Quiz Application</a>
+                    <a class="navbar-brand" href="<%= request.getRequestURL().substring(0, request.getRequestURL().lastIndexOf(request.getServletPath())) %>">Quiz Application</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Must</a></li>
                         <li><a href="#about">Be</a></li>
                         <li><a href="#contact">Changed</a></li>
+                        <li><a>According</a></li>
+                        <li><a>To</a></li>
+                        <li><a>Session</a></li>
                     </ul>
                 </div>
             </div>
