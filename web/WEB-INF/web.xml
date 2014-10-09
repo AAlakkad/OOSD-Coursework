@@ -4,9 +4,17 @@
         <servlet-name>Relay</servlet-name>
         <servlet-class>presentation.Relay</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>presentation.servlets.Login</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Relay</servlet-name>
         <url-pattern>/Relay</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
