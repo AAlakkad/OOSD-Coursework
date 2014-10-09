@@ -6,7 +6,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Relay</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/Relay</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
