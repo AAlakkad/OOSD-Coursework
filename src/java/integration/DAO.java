@@ -78,4 +78,28 @@ public class DAO implements DAO_Interface {
             throw sqle;
         }
     }
+
+    public boolean checkLogin(String username, String password)
+            throws ClassNotFoundException, SQLException {
+
+        try {
+            Statement myStatement = getConnection();
+            String query = "SELECT * FROM users WHERE username like '" + username + "' AND password LIKE '" + password + "' LIMIT 1";
+            myStatement.executeQuery(query);
+            ResultSet result = myStatement.getResultSet();
+            boolean canLogin = false;
+            if (result.next()) {
+                canLogin = true;
+            }
+            closeConnection();
+            return canLogin;
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+
+    }
 }
