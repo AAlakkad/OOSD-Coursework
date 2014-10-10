@@ -1,4 +1,4 @@
-<% String baseUrl = request.getRequestURL().substring(0, request.getRequestURL().lastIndexOf(request.getServletPath()));%>
+<%@page import="business.TransferObjects.UserInterface"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="author" content="Ammar Alakkad">
-        <link rel="stylesheet" href="<%= baseUrl%>/assets/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/assets/bootstrap.min.css"/>
         <title>Quiz Application</title>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -16,6 +16,8 @@
         <![endif]-->
     </head>
     <body>
+
+
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -25,18 +27,37 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<%= baseUrl%>">Quiz Application</a>
+                    <a class="navbar-brand" href="/">Quiz Application</a>
                 </div>
+                <% UserInterface user = (UserInterface) session.getAttribute("user"); %>
+                <%
+                    if (user != null && user.exists()) {
+                %>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
+                        <%
+                            if (user.isAdministrator()) {
+                                // Load administrator menu
+                        %>
                         <li class="active"><a href="#">Must</a></li>
                         <li><a href="#about">Be</a></li>
                         <li><a href="#contact">Changed</a></li>
+                            <%
+                            } else {
+                                    // Load contestant menu
+                            %>
                         <li><a>According</a></li>
                         <li><a>To</a></li>
                         <li><a>Session</a></li>
+                            <%
+                                }
+                            %>
                     </ul>
                 </div>
+                <%
+                    }
+                %>
+
             </div>
         </div>
 
