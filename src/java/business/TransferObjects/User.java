@@ -1,21 +1,62 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package business.TransferObjects;
 
 /**
  *
  * @author ammar
  */
-public interface User {
+public class User implements UserInterface {
 
-    void checkLogin(String username, String password);
+    private String username, type;
 
-    String getUsername();
+    public User() {
+    }
 
-    String getType();
+    public User(String username, String type) {
+        this.setUsername(username);
+        this.setType(type);
+    }
 
-    int getScore(int topicId);
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
+    public int getScore(int topicId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public Boolean exists() {
+        if (this.username == null || this.type == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public Boolean isAdministrator() {
+        return this.type.equals("administrator");
+    }
+
+    @Override
+    public Boolean isContestant() {
+        return this.type.equals("contestant");
+    }
+
 }
