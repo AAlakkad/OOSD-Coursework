@@ -10,5 +10,12 @@ package business.TransferObjects;
  * @author ammar
  */
 public interface User {
-    
+
+    void checkLogin(String username, String password);
+
+    String getUsername();
+
+    String getType();
+
+    int getScore(int topicId);
 }
