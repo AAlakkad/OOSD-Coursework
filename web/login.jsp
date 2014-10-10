@@ -3,13 +3,13 @@
 <div class="col-md-4 col-md-offset-4">
     <h1>Login</h1>
     <br>
-    
-    <% if(1 == 1) {%>
-        <div class="alert alert-danger" role="alert">
-            Invalid username or password.
-        </div>
-    <% } %>
-    
+
+    <% if (1 == 1) {%>
+    <div class="alert alert-danger" role="alert">
+        Invalid username or password.
+    </div>
+    <% }%>
+
     <form action="<%= baseUrl%>/Relay" method="post">
         <input type="hidden" name="action" value="Login" />
 

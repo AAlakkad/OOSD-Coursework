@@ -31,7 +31,7 @@ public class Relay extends HttpServlet {
             throws ServletException, IOException {
 
         String action = request.getParameter("action");
-        
+
         if (action != null) {
             RequestDispatcher rd = request.getRequestDispatcher("/");
             switch (action) {
