@@ -1,14 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package integration;
+
+import business.TransferObjects.UserInterface;
+import java.sql.SQLException;
 
 /**
  *
  * @author ammar
  */
 public interface DAO_Interface {
-    
+    UserInterface checkLogin(String username, String password) throws ClassNotFoundException, SQLException ;
 }
