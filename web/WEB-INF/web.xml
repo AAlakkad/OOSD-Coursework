@@ -8,6 +8,10 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>presentation.servlets.Login</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Topics</servlet-name>
+        <servlet-class>presentation.servlets.admin.Topics</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Relay</servlet-name>
         <url-pattern>/Relay</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Topics</servlet-name>
+        <url-pattern>/Topics</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
