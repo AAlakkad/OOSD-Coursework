@@ -4,13 +4,19 @@
     <h1>Login</h1>
     <br>
 
-    <% if (1 == 1) {%>
+    <%
+        String error = (String) session.getAttribute("error");
+        if (error != null) {
+    %>
     <div class="alert alert-danger" role="alert">
-        Invalid username or password.
+        <%= error%>
     </div>
-    <% }%>
+    <%
+            session.removeAttribute("error");
+        }
+    %>
 
-    <form action="<%= baseUrl%>/Relay" method="post">
+    <form action="/Relay" method="post">
         <input type="hidden" name="action" value="Login" />
 
         <div class="form-group">
@@ -26,4 +32,5 @@
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
 </div>
+
 <%@include file="partials/footer.jsp" %>
