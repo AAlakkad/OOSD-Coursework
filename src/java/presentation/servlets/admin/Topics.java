@@ -5,11 +5,15 @@
  */
 package presentation.servlets.admin;
 
+import integration.DAO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author ammar
@@ -25,17 +29,17 @@ public class Topics extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
+            throws ServletException, IOException, ClassNotFoundException {
         String subAction = request.getParameter("sub-action");
         switch (subAction) {
             case "new":
-                this.processNew();
+                this.processNew(request);
                 break;
             case "edit":
-                this.processEdit(Integer.parseInt(request.getParameter("sub-action")));
+                this.processEdit(request);
                 break;
         }
+        response.sendRedirect("/admin/topics/index.jsp");
 
     }
 
@@ -52,7 +56,11 @@ public class Topics extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -66,7 +74,11 @@ public class Topics extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -79,12 +91,30 @@ public class Topics extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void processNew() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void processNew(HttpServletRequest request) throws ClassNotFoundException {
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        DAO dao = DAO.getQuizDAO();
+        try {
+            dao.insertTopic(name, description);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void processEdit(int topicId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void processEdit(HttpServletRequest request) throws ClassNotFoundException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        DAO dao = DAO.getQuizDAO();
+        try {
+            dao.updateTopic(id, name, description);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }

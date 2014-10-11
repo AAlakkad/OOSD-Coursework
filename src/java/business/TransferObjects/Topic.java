@@ -8,9 +8,30 @@ package business.TransferObjects;
 /**
  * @author ammar
  */
-public class Topic implements TopicInterface {
+public final class Topic implements TopicInterface {
 
-    private String name, description;
+    private Integer id;
+    private String name = "", description = "";
+
+    public Topic() {
+
+    }
+
+    public Topic(Integer id, String name, String description) {
+        this.setId(id);
+        this.setName(name);
+        this.setDescription(description);
+    }
+
+    @Override
+    public Integer getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public String getName() {
