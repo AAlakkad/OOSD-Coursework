@@ -30,8 +30,16 @@
             <textarea class="form-control" name="description" id="description" placeholder="Topic description"><%=description%></textarea>
         </div>
 
-        <input type="submit" value="Save" class="btn btn-primary"/>
+        <input type="submit" value="Save" class="btn btn-primary pull-left"/>
     </form>
+    <% if (id != null) {%>
+    <form action="/Relay" method="post">
+        <input type="hidden" name="action" value="Topics"/>
+        <input type="hidden" name="sub-action" value="delete"/>
+        <input type="hidden" name="id" value="<%= id%>">
+        <input type="submit" value="Delete" class="btn btn-danger pull-right confirm" />
+    </form>
+    <% }%>
 </div>
 
 <%@include file="../../partials/footer.jsp" %>

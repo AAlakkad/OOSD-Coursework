@@ -23,10 +23,10 @@ public class Topics extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
@@ -38,20 +38,22 @@ public class Topics extends HttpServlet {
             case "edit":
                 this.processEdit(request);
                 break;
+            case "delete":
+                this.processDelete(request);
+                break;
         }
         response.sendRedirect("/admin/topics/index.jsp");
 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,10 +68,10 @@ public class Topics extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -97,7 +99,7 @@ public class Topics extends HttpServlet {
         DAO dao = DAO.getQuizDAO();
         try {
             dao.insertTopic(name, description);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,11 +112,22 @@ public class Topics extends HttpServlet {
         DAO dao = DAO.getQuizDAO();
         try {
             dao.updateTopic(id, name, description);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+
+    private void processDelete(HttpServletRequest request) throws ClassNotFoundException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        DAO dao = DAO.getQuizDAO();
+        try {
+            dao.deleteTopic(id);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

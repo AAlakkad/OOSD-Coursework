@@ -194,4 +194,22 @@ public class DAO implements DAO_Interface {
         }
     }
 
+    @Override
+    public void deleteTopic(Integer id) throws ClassNotFoundException, SQLException {
+        try {
+            System.out.println("Start inserting");
+            Statement myStatement = getConnection();
+            String query = "DELETE FROM topics WHERE id = " + id + " LIMIT 1;";
+            myStatement.executeUpdate(query);
+
+            closeConnection();
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+    }
+
 }

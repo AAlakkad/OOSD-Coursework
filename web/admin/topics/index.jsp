@@ -12,7 +12,7 @@
         <tr>
             <th width="5%">#</th>
             <th>Name</th>
-            <th width="15%">Actions</th>
+            <th width="10%">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -28,10 +28,7 @@
             <td><%=aTopic.getId()%></td>
             <td><%=aTopic.getName()%></td>
             <td>
-                <div class="btn-group btn-group-justified">
-                    <a href="./form.jsp?id=<%=aTopic.getId()%>" class="btn btn-success">Edit</a>
-                    <a href="#<%=aTopic.getId()%>" class="btn btn-default">Delete</a>
-                </div>
+                <a href="./form.jsp?id=<%=aTopic.getId()%>" class="btn btn-success">Edit</a>
             </td>
         </tr>
         <%

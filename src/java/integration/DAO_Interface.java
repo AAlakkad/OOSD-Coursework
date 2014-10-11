@@ -22,4 +22,7 @@ public interface DAO_Interface {
     void insertTopic(String name, String description) throws ClassNotFoundException, SQLException;
 
     void updateTopic(Integer id, String name, String description) throws ClassNotFoundException, SQLException;
+
+    void deleteTopic(Integer id) throws ClassNotFoundException, SQLException;
+
 }
