@@ -39,8 +39,8 @@
                     if (user.isAdministrator()) {
                         // Load administrator menu
                 %>
-                <li class="active"><a href="#">Must</a></li>
-                <li><a href="#about">Be</a></li>
+                <li><a href="/admin/topics/list.jsp">Topics</a></li>
+                <li><a href="/admin/questions/list.jsp">Questions</a></li>
                 <li><a href="#contact">Changed</a></li>
                 <%
                 } else {
