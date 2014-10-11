@@ -6,12 +6,14 @@
 package business.TransferObjects;
 
 /**
- *
  * @author ammar
  */
 public interface TopicInterface {
     String getName();
+
     void setName(String name);
+
     String getDescription();
+
     void setDescription(String description);
 }

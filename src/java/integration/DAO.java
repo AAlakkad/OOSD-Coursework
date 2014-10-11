@@ -1,10 +1,10 @@
 package integration;
 
 import business.TransferObjects.*;
+
 import java.sql.*;
 
 /**
- *
  * @author ammar
  */
 public class DAO implements DAO_Interface {
@@ -51,7 +51,6 @@ public class DAO implements DAO_Interface {
     }
 
     /**
-     *
      * @param username
      * @param password
      * @return

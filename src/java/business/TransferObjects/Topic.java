@@ -6,7 +6,6 @@
 package business.TransferObjects;
 
 /**
- *
  * @author ammar
  */
 public class Topic implements TopicInterface {

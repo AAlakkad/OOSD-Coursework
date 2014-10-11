@@ -1,7 +1,6 @@
 package business.TransferObjects;
 
 /**
- *
  * @author ammar
  */
 public class User implements UserInterface {
@@ -22,23 +21,23 @@ public class User implements UserInterface {
     }
 
     @Override
-    public String getType() {
-        return this.type;
-    }
-
-    @Override
-    public int getScore(int topicId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void setUsername(String username) {
         this.username = username;
     }
 
     @Override
+    public String getType() {
+        return this.type;
+    }
+
+    @Override
     public void setType(String type) {
         this.type = type;
+    }
+
+    @Override
+    public int getScore(int topicId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

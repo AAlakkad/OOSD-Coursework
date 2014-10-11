@@ -1,7 +1,6 @@
 package business.TransferObjects;
 
 /**
- *
  * @author ammar
  */
 public interface UserInterface {
@@ -12,14 +11,14 @@ public interface UserInterface {
 
     String getType();
 
+    void setType(String type);
+
     // Check if UserInterface instance has username/type fields filled
     Boolean exists();
 
     Boolean isAdministrator();
 
     Boolean isContestant();
-
-    void setType(String type);
 
     int getScore(int topicId);
 }
