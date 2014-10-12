@@ -202,7 +202,6 @@ public class DAO implements DAO_Interface {
     @Override
     public void insertTopic(String name, String description) throws ClassNotFoundException, SQLException {
         try {
-            System.out.println("Start inserting");
             Statement myStatement = getConnection();
             String query = "INSERT INTO topics (name, description, create_date) VALUES('" + name + "', '" + description + "', NOW());";
             myStatement.executeUpdate(query);
@@ -220,7 +219,6 @@ public class DAO implements DAO_Interface {
     @Override
     public void deleteTopic(Integer id) throws ClassNotFoundException, SQLException {
         try {
-            System.out.println("Start inserting");
             Statement myStatement = getConnection();
             String query = "DELETE FROM topics WHERE id = " + id + " LIMIT 1;";
             myStatement.executeUpdate(query);
@@ -295,7 +293,20 @@ public class DAO implements DAO_Interface {
 
     @Override
     public void insertQuestion(String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement myStatement = getConnection();
+            String query1 = "INSERT INTO questions VALUES(NULL, " + topicId + ", " + difficultyId + ", '" + title + "', " + correctAnswer + ", '" + answer_1 + "', '" + answer_2 + "', '" + answer_3 + "', '" + answer_4 + "', NOW());";
+            System.out.println(query1);
+            myStatement.executeUpdate(query1);
+
+            closeConnection();
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
     }
 
     @Override
@@ -325,7 +336,19 @@ public class DAO implements DAO_Interface {
 
     @Override
     public void deleteQuestion(Integer id) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement myStatement = getConnection();
+            String query = "DELETE FROM questions WHERE id = " + id + " LIMIT 1;";
+            myStatement.executeUpdate(query);
+
+            closeConnection();
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
     }
 
 }

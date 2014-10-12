@@ -39,7 +39,7 @@
         <input type="hidden" name="id" value="<%= id%>">
 
         <div class="form-group">
-            <label class="col-md-2" for="name">Title:</label>
+            <label class="col-md-2" for="title">Title:</label>
             <div class="col-md-10">
                 <input type="text" class="form-control" name="title" id="title" placeholder="Question title" value="<%= title%>" />
             </div>

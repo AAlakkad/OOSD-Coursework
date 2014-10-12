@@ -12,6 +12,10 @@
         <servlet-name>Topics</servlet-name>
         <servlet-class>presentation.servlets.admin.Topics</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Questions</servlet-name>
+        <servlet-class>presentation.servlets.admin.Questions</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Relay</servlet-name>
         <url-pattern>/Relay</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>Topics</servlet-name>
         <url-pattern>/Topics</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Questions</servlet-name>
+        <url-pattern>/Questions</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
