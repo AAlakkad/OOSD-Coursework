@@ -12,6 +12,8 @@ import java.util.HashMap;
 public interface DAO_Interface {
 
     UserInterface checkLogin(String username, String password) throws ClassNotFoundException, SQLException;
+    
+    HashMap<Integer, String> getDifficultiesNames() throws ClassNotFoundException, SQLException;
 
     HashMap<Integer, String> getTopicsNames() throws ClassNotFoundException, SQLException;
 

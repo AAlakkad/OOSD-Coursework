@@ -31,7 +31,7 @@ public class DAO implements DAO_Interface {
             Class.forName("com.mysql.jdbc.Driver");
             // setup the connection with the DB.
             databaseConnection = DriverManager
-                    .getConnection("jdbc:mysql://192.168.22.10/coursework_db?"
+                    .getConnection("jdbc:mysql://localhost/coursework_db?"
                             + "user=root&password=root");
             return databaseConnection.createStatement();
         } catch (ClassNotFoundException cnfe) {
@@ -90,6 +90,29 @@ public class DAO implements DAO_Interface {
             HashMap<Integer, String> topics = new HashMap<Integer, String>();
             Statement myStatement = getConnection();
             String query1 = "SELECT id, name FROM topics;";
+            ResultSet results = myStatement.executeQuery(query1);
+
+            while (results.next()) {
+                topics.put(results.getInt("id"), results.getString("name"));
+
+            }
+            closeConnection();
+            return topics;
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+    }
+
+    @Override
+    public HashMap<Integer, String> getDifficultiesNames() throws ClassNotFoundException, SQLException {
+        try {
+            HashMap<Integer, String> topics = new HashMap<Integer, String>();
+            Statement myStatement = getConnection();
+            String query1 = "SELECT id, name FROM difficulties;";
             ResultSet results = myStatement.executeQuery(query1);
 
             while (results.next()) {
@@ -214,12 +237,60 @@ public class DAO implements DAO_Interface {
 
     @Override
     public ArrayList<QuestionInterface> getQuestions() throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            ArrayList<QuestionInterface> questions = new ArrayList<QuestionInterface>();
+            Statement myStatement = getConnection();
+            String query1 = "SELECT * FROM questions;";
+            ResultSet results = myStatement.executeQuery(query1);
+
+            while (results.next()) {
+                questions.add(populateQuestionObject(results));
+            }
+            closeConnection();
+            return questions;
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+    }
+
+    private Question populateQuestionObject(ResultSet result) throws SQLException {
+        Integer id = result.getInt("id"),
+                topicId = result.getInt("topic_id"),
+                difficultyId = result.getInt("difficulty_id"),
+                correctAnswer = result.getInt("correct_answer");
+        String title = result.getString("title"),
+                answer_1 = result.getString("answer_1"),
+                answer_2 = result.getString("answer_2"),
+                answer_3 = result.getString("answer_3"),
+                answer_4 = result.getString("answer_4");
+
+        return new Question(id, topicId, difficultyId, correctAnswer, title, answer_1, answer_2, answer_3, answer_4);
     }
 
     @Override
     public QuestionInterface getQuestion(Integer id) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            QuestionInterface question = new Question();
+            Statement myStatement = getConnection();
+            String query1 = "SELECT * FROM questions WHERE id = " + id + " LIMIT 1;";
+            ResultSet result = myStatement.executeQuery(query1);
+            if (result.next()) {
+                question = populateQuestionObject(result);
+            }
+
+            closeConnection();
+            return question;
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
     }
 
     @Override
@@ -229,7 +300,27 @@ public class DAO implements DAO_Interface {
 
     @Override
     public void updateQuestion(Integer id, String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Statement myStatement = getConnection();
+            String query1 = "UPDATE questions SET title='" + title + "', "
+                    + "topic_id='" + topicId + "', "
+                    + "difficulty_id='" + difficultyId + "', "
+                    + "correct_answer='" + correctAnswer + "', "
+                    + "answer_1='" + answer_1 + "', "
+                    + "answer_2='" + answer_2 + "', "
+                    + "answer_3='" + answer_3 + "', "
+                    + "answer_4='" + answer_4 + "'"
+                    + " WHERE id = " + id + " LIMIT 1;";
+            myStatement.executeUpdate(query1);
+
+            closeConnection();
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
     }
 
     @Override

@@ -27,6 +27,7 @@ public class Questions extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.lang.ClassNotFoundException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
@@ -42,7 +43,7 @@ public class Questions extends HttpServlet {
                 this.processDelete(request);
                 break;
         }
-        response.sendRedirect("/admin/topics/index.jsp");
+        response.sendRedirect("/admin/questions/index.jsp");
 
     }
 
@@ -94,11 +95,18 @@ public class Questions extends HttpServlet {
     }// </editor-fold>
 
     private void processNew(HttpServletRequest request) throws ClassNotFoundException {
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
+        Integer topicId = Integer.parseInt(request.getParameter("topic_id")),
+                difficultyId = Integer.parseInt(request.getParameter("difficulty_id")),
+                correctAnswer = Integer.parseInt(request.getParameter("correct_answer"));
+        String title = request.getParameter("title"),
+                answer_1 = request.getParameter("answer_1"),
+                answer_2 = request.getParameter("answer_2"),
+                answer_3 = request.getParameter("answer_3"),
+                answer_4 = request.getParameter("answer_4");
+
         DAO dao = DAO.getQuizDAO();
         try {
-            dao.insertTopic(name, description);
+            dao.insertQuestion(title, topicId, difficultyId, correctAnswer, answer_1, answer_2, answer_3, answer_4);
 
         } catch (SQLException ex) {
             Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,12 +114,18 @@ public class Questions extends HttpServlet {
     }
 
     private void processEdit(HttpServletRequest request) throws ClassNotFoundException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
+        Integer id = Integer.parseInt(request.getParameter("id")),
+                topicId = Integer.parseInt(request.getParameter("topic_id")),
+                difficultyId = Integer.parseInt(request.getParameter("difficulty_id")),
+                correctAnswer = Integer.parseInt(request.getParameter("correct_answer"));
+        String title = request.getParameter("title"),
+                answer_1 = request.getParameter("answer_1"),
+                answer_2 = request.getParameter("answer_2"),
+                answer_3 = request.getParameter("answer_3"),
+                answer_4 = request.getParameter("answer_4");
         DAO dao = DAO.getQuizDAO();
         try {
-            dao.updateTopic(id, name, description);
+            dao.updateQuestion(id, title, topicId, difficultyId, correctAnswer, answer_1, answer_2, answer_3, answer_4);
 
         } catch (SQLException ex) {
             Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
@@ -123,7 +137,7 @@ public class Questions extends HttpServlet {
         Integer id = Integer.parseInt(request.getParameter("id"));
         DAO dao = DAO.getQuizDAO();
         try {
-            dao.deleteTopic(id);
+            dao.deleteQuestion(id);
 
         } catch (SQLException ex) {
             Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);

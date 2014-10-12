@@ -32,17 +32,17 @@ public interface QuestionInterface {
 
     String getAnswer_1();
 
-    void getAnswer_1(String answer);
+    void setAnswer_1(String answer);
 
     String getAnswer_2();
 
-    void getAnswer_2(String answer);
+    void setAnswer_2(String answer);
 
     String getAnswer_3();
 
-    void getAnswer_3(String answer);
+    void setAnswer_3(String answer);
 
     String getAnswer_4();
 
-    void getAnswer_4(String answer);
+    void setAnswer_4(String answer);
 }
