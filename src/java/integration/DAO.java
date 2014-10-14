@@ -14,6 +14,10 @@ public class DAO implements DAO_Interface {
     // Singleton object
     private static DAO theQuizDAO;
     private Connection databaseConnection;
+    
+    // Quiz questions number to use app-wide
+    public final static Integer quizQuestions = 10;
+    
 
     private DAO() {
     }
