@@ -16,6 +16,10 @@
         <servlet-name>Questions</servlet-name>
         <servlet-class>presentation.servlets.admin.Questions</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Quiz</servlet-name>
+        <servlet-class>presentation.servlets.Quiz</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Relay</servlet-name>
         <url-pattern>/Relay</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Questions</servlet-name>
         <url-pattern>/Questions</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Quiz</servlet-name>
+        <url-pattern>/Quiz</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
