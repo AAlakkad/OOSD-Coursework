@@ -10,9 +10,9 @@
     String answer_3 = question.getAnswer_3();
     String answer_4 = question.getAnswer_4();
 %>
-<h2>Question (x) from (y)</h2>
+<h4>Question: <small>(x) from (y)</small></h4>
 
-<p class="lead"><%= title%></p>
+<h1 class="question-title"><%= title%></h1>
 
 <form method="post" action="/Relay">
     <input type="hidden" name="action" value="Quiz">
