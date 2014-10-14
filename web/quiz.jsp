@@ -1,11 +1,7 @@
 <%@page import="business.TransferObjects.QuestionInterface"%>
 <%@page import="integration.DAO"%>
 <%@include file="partials/header.jsp" %>
-<% Integer questionId = 1; %>
-
-<h2>Question (x) from (y)</h2>
-
-<%
+<%    Integer questionId = 1;
     DAO dao = DAO.getQuizDAO();
     QuestionInterface question = dao.getQuestion(questionId);
     String title = question.getTitle();
@@ -14,15 +10,14 @@
     String answer_3 = question.getAnswer_3();
     String answer_4 = question.getAnswer_4();
 %>
+<h2>Question (x) from (y)</h2>
 
-<br>
 <p class="lead"><%= title%></p>
 
 <form method="post" action="/Relay">
     <input type="hidden" name="action" value="Quiz">
     <input type="hidden" name="sub_action" value="question">
     <input type="hidden" name="question_id" value="<%= questionId%>">
-
 
     <div class="radio">
         <label for="answer_1">
@@ -52,8 +47,7 @@
         </label>
     </div>
 
-    <br>
     <input type="submit" value="Submit" class="btn btn-default">
-
 </form>
+            
 <%@include file="partials/footer.jsp" %>

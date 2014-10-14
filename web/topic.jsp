@@ -25,7 +25,6 @@
     <%
         }
     %>
-
     <input type="submit" value="Start!" class="btn btn-success">
 </form>
 <%@include file="partials/footer.jsp" %>
