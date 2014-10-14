@@ -46,7 +46,7 @@
                 } else {
                     // Load contestant menu
                 %>
-                <li><a>According</a></li>
+                <li><a href="/topic.jsp">Start quiz</a></li>
                 <li><a>To</a></li>
                 <li><a>Session</a></li>
                 <%
