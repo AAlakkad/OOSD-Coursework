@@ -37,6 +37,9 @@ public class Relay extends HttpServlet {
                 case "Questions":
                     rd = request.getRequestDispatcher(action);
                     break;
+                case "Quiz":
+                    rd = request.getRequestDispatcher(action);
+                    break;
             }
             if (rd != null) {
                 rd.forward(request, response);
