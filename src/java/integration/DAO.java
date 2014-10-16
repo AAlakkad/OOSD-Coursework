@@ -14,10 +14,9 @@ public class DAO implements DAO_Interface {
     // Singleton object
     private static DAO theQuizDAO;
     private Connection databaseConnection;
-    
+
     // Quiz questions number to use app-wide
     public final static Integer quizQuestions = 10;
-    
 
     private DAO() {
     }
@@ -279,6 +278,49 @@ public class DAO implements DAO_Interface {
             QuestionInterface question = new Question();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM questions WHERE id = " + id + " LIMIT 1;";
+            ResultSet result = myStatement.executeQuery(query1);
+            if (result.next()) {
+                question = populateQuestionObject(result);
+            }
+
+            closeConnection();
+            return question;
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+    }
+
+    @Override
+    public QuestionInterface getRandomQuestion() throws ClassNotFoundException, SQLException {
+        try {
+            QuestionInterface question = new Question();
+            Statement myStatement = getConnection();
+            String query1 = "SELECT * FROM questions ORDER BY RAND() LIMIT 1;";
+            ResultSet result = myStatement.executeQuery(query1);
+            if (result.next()) {
+                question = populateQuestionObject(result);
+            }
+            closeConnection();
+            return question;
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+    }
+
+    @Override
+    public QuestionInterface getRandomQuestion(Integer topicId) throws ClassNotFoundException, SQLException {
+        try {
+            QuestionInterface question = new Question();
+            Statement myStatement = getConnection();
+            String query1 = "SELECT * FROM questions WHERE topic_id = " + topicId + " ORDER BY RAND() LIMIT 1;";
             ResultSet result = myStatement.executeQuery(query1);
             if (result.next()) {
                 question = populateQuestionObject(result);
