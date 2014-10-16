@@ -9,6 +9,7 @@
 
     <form method="post" action="/Relay">
         <input type="hidden" name="action" value="Quiz">
+        <input type="hidden" name="sub_action" value="choose_topic">
 
         <%    DAO dao = DAO.getQuizDAO();
             ArrayList topics = dao.getTopics();
@@ -18,8 +19,8 @@
                 aTopic = (Topic) i.next();
         %>
         <div class="radio">
-            <label for="topic_id">
-                <input type="radio" value="<%=aTopic.getId()%>" name="topic_id" id="topic_id" />
+            <label for="topic_<%= aTopic.getId()%>">
+                <input type="radio" value="<%=aTopic.getId()%>" name="topic_id" id="topic_<%= aTopic.getId()%>" />
                 <%=aTopic.getName()%>
             </label>
         </div>
