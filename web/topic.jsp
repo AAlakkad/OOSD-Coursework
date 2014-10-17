@@ -1,7 +1,7 @@
-<%@page import="java.util.Iterator"%>
-<%@page import="business.TransferObjects.Topic"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="integration.DAO"%>
+<%@page import="business.TransferObjects.Topic" %>
+<%@page import="integration.DAO" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.Iterator" %>
 <%@include file="partials/header.jsp" %>
 
 <div class="col-md-8 col-md-offset-2">
@@ -11,7 +11,7 @@
         <input type="hidden" name="action" value="Quiz">
         <input type="hidden" name="sub_action" value="choose_topic">
 
-        <%    DAO dao = DAO.getQuizDAO();
+        <% DAO dao = DAO.getQuizDAO();
             ArrayList topics = dao.getTopics();
             Topic aTopic;
             Iterator i = topics.iterator();
@@ -20,7 +20,7 @@
         %>
         <div class="radio">
             <label for="topic_<%= aTopic.getId()%>">
-                <input type="radio" value="<%=aTopic.getId()%>" name="topic_id" id="topic_<%= aTopic.getId()%>" />
+                <input type="radio" value="<%=aTopic.getId()%>" name="topic_id" id="topic_<%= aTopic.getId()%>"/>
                 <%=aTopic.getName()%>
             </label>
         </div>

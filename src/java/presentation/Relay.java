@@ -26,27 +26,10 @@ public class Relay extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action != null) {
-            RequestDispatcher rd = request.getRequestDispatcher("/");
-            switch (action) {
-                case "Login":
-                    rd = request.getRequestDispatcher(action);
-                    break;
-                case "Topics":
-                    rd = request.getRequestDispatcher(action);
-                    break;
-                case "Questions":
-                    rd = request.getRequestDispatcher(action);
-                    break;
-                case "Quiz":
-                    rd = request.getRequestDispatcher(action);
-                    break;
-            }
-            if (rd != null) {
-                rd.forward(request, response);
-                // output server message indicating forward has been done
-                System.out.println("Request forwarded to " + action + " servlet");
-            }
-
+            RequestDispatcher rd = request.getRequestDispatcher(action);
+            rd.forward(request, response);
+            // output server message indicating forward has been done
+            System.out.println("Request forwarded to " + action + " servlet");
         }
 
     }

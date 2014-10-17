@@ -1,7 +1,7 @@
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="business.TransferObjects.Topic"%>
-<%@page import="integration.DAO"%>
+<%@page import="business.TransferObjects.Topic" %>
+<%@page import="integration.DAO" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.Iterator" %>
 <%@include file="../../partials/header.jsp" %>
 
 <h1>Topics <a href="./form.jsp" class="btn btn-sm btn-default">New Topic</a></h1>
@@ -17,7 +17,7 @@
     </thead>
     <tbody>
 
-        <%    DAO dao = DAO.getQuizDAO();
+        <% DAO dao = DAO.getQuizDAO();
             ArrayList topics = dao.getTopics();
             Topic aTopic;
             Iterator i = topics.iterator();
@@ -25,8 +25,10 @@
                 aTopic = (Topic) i.next();
         %>
         <tr>
-            <td><%=aTopic.getId()%></td>
-            <td><%=aTopic.getName()%></td>
+            <td><%=aTopic.getId()%>
+            </td>
+            <td><%=aTopic.getName()%>
+            </td>
             <td>
                 <a href="./form.jsp?id=<%=aTopic.getId()%>" class="btn btn-success">Edit</a>
             </td>

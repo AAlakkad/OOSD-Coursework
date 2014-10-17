@@ -1,8 +1,8 @@
-<%@page import="java.util.Map"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.HashMap"%>
-<%@page import="integration.DAO"%>
-<%@page import="business.TransferObjects.*"%>
+<%@page import="business.TransferObjects.Question" %>
+<%@page import="business.TransferObjects.QuestionInterface" %>
+<%@page import="integration.DAO" %>
+<%@page import="java.util.HashMap" %>
+<%@page import="java.util.Iterator" %>
 <%@include file="../../partials/header.jsp" %>
 <% String id = request.getParameter("id");
     String subAction = "new";
@@ -30,7 +30,10 @@
         answer_4 = question.getAnswer_4();
     }
 %>
-<h1><a href="./index.jsp">Questions</a> <small>&raquo; <%= subAction%></small></h1>
+<h1><a href="./index.jsp">Questions</a>
+    <small>&raquo; <%= subAction%>
+    </small>
+</h1>
 
 <div class="col-md-8 col-md-offset-2">
     <form action="/Relay" method="post" class="form-horizontal">
@@ -40,13 +43,15 @@
 
         <div class="form-group">
             <label class="col-md-2" for="title">Title:</label>
+
             <div class="col-md-10">
-                <input type="text" class="form-control" name="title" id="title" placeholder="Question title" value="<%= title%>" />
+                <input type="text" class="form-control" name="title" id="title" placeholder="Question title" value="<%= title%>"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2" for="name">Topic:</label>
+
             <div class="col-md-10">
                 <select class="form-control" name="topic_id" id="topic_id">
                     <%
@@ -58,7 +63,8 @@
 
                             String selected = topicId == _topic_id ? "selected" : "";
                     %>
-                    <option value="<%= _topic_id%>" <%=selected%>><%=_topic_name%></option>
+                    <option value="<%= _topic_id%>" <%=selected%>><%=_topic_name%>
+                    </option>
                     <%
                         }
                     %>
@@ -68,6 +74,7 @@
 
         <div class="form-group">
             <label class="col-md-2" for="name">Difficulty:</label>
+
             <div class="col-md-10">
                 <select class="form-control" name="difficulty_id" id="difficulty_id">
                     <%
@@ -79,7 +86,8 @@
 
                             String selected = difficultyId == _difficulty_id ? "selected" : "";
                     %>
-                    <option value="<%= _difficulty_id%>" <%=selected%>><%=_difficulty_name%></option>
+                    <option value="<%= _difficulty_id%>" <%=selected%>><%=_difficulty_name%>
+                    </option>
                     <%
                         }
                     %>
@@ -87,45 +95,51 @@
             </div>
         </div>
 
-        <div class="alert alert-info">Select a <strong>radio box</strong> at the right of each answer to specify the correct answer.</div>
+        <div class="alert alert-info">Select a <strong>radio box</strong> at the right of each answer to specify the
+            correct answer.
+        </div>
 
         <div class="form-group">
             <label class="col-md-2" for="name">Answer 1:</label>
+
             <div class="input-group">
                 <div class="input-group-addon">
                     <input type="radio" name="correct_answer" value="1" checked <% if (correctAnswer == 1) {%>checked<%}%>>
                 </div>
-                <input type="text" class="form-control col-md-10" name="answer_1" id="answer_1" placeholder="Answer 1" value="<%= answer_1%>" />
+                <input type="text" class="form-control col-md-10" name="answer_1" id="answer_1" placeholder="Answer 1" value="<%= answer_1%>"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2" for="name">Answer 2:</label>
+
             <div class="input-group">
                 <div class="input-group-addon">
                     <input type="radio" name="correct_answer" value="2" <% if (correctAnswer == 2) {%>checked<%}%>>
                 </div>
-                <input type="text" class="form-control col-md-10" name="answer_2" id="answer_2" placeholder="Answer 2" value="<%= answer_2%>" />
+                <input type="text" class="form-control col-md-10" name="answer_2" id="answer_2" placeholder="Answer 2" value="<%= answer_2%>"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2" for="name">Answer 3:</label>
+
             <div class="input-group">
                 <div class="input-group-addon">
                     <input type="radio" name="correct_answer" value="3" <% if (correctAnswer == 3) {%>checked<%}%>>
                 </div>
-                <input type="text" class="form-control col-md-10" name="answer_3" id="answer_3" placeholder="Answer 3" value="<%= answer_3%>" />
+                <input type="text" class="form-control col-md-10" name="answer_3" id="answer_3" placeholder="Answer 3" value="<%= answer_3%>"/>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-2" for="name">Answer 4:</label>
+
             <div class="input-group">
                 <div class="input-group-addon">
                     <input type="radio" name="correct_answer" value="4" <% if (correctAnswer == 4) {%>checked<%}%>>
                 </div>
-                <input type="text" class="form-control col-md-10" name="answer_4" id="answer_4" placeholder="Answer 4" value="<%= answer_4%>" />
+                <input type="text" class="form-control col-md-10" name="answer_4" id="answer_4" placeholder="Answer 4" value="<%= answer_4%>"/>
             </div>
         </div>
 
@@ -138,7 +152,7 @@
         <input type="hidden" name="action" value="Questions"/>
         <input type="hidden" name="sub-action" value="delete"/>
         <input type="hidden" name="id" value="<%= id%>">
-        <input type="submit" value="Delete" class="btn btn-danger pull-right confirm" />
+        <input type="submit" value="Delete" class="btn btn-danger pull-right confirm"/>
     </form>
     <% }%>
 </div>

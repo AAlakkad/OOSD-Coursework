@@ -6,6 +6,7 @@
 package presentation.servlets.admin;
 
 import integration.DAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +45,42 @@ public class Topics extends HttpServlet {
         }
         response.sendRedirect("/admin/topics/index.jsp");
 
+    }
+
+    private void processNew(HttpServletRequest request) throws ClassNotFoundException {
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        DAO dao = DAO.getQuizDAO();
+        try {
+            dao.insertTopic(name, description);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void processEdit(HttpServletRequest request) throws ClassNotFoundException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        DAO dao = DAO.getQuizDAO();
+        try {
+            dao.updateTopic(id, name, description);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    private void processDelete(HttpServletRequest request) throws ClassNotFoundException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        DAO dao = DAO.getQuizDAO();
+        try {
+            dao.deleteTopic(id);
+        } catch (SQLException ex) {
+            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -92,42 +129,5 @@ public class Topics extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private void processNew(HttpServletRequest request) throws ClassNotFoundException {
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        DAO dao = DAO.getQuizDAO();
-        try {
-            dao.insertTopic(name, description);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void processEdit(HttpServletRequest request) throws ClassNotFoundException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        DAO dao = DAO.getQuizDAO();
-        try {
-            dao.updateTopic(id, name, description);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    private void processDelete(HttpServletRequest request) throws ClassNotFoundException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        DAO dao = DAO.getQuizDAO();
-        try {
-            dao.deleteTopic(id);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Topics.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
 }

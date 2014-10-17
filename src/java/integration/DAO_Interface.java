@@ -11,15 +11,15 @@ import java.util.HashMap;
  */
 public interface DAO_Interface {
 
-    UserInterface checkLogin(String username, String password) throws ClassNotFoundException, SQLException;
-    
+    User checkLogin(String username, String password) throws ClassNotFoundException, SQLException;
+
     HashMap<Integer, String> getDifficultiesNames() throws ClassNotFoundException, SQLException;
 
     HashMap<Integer, String> getTopicsNames() throws ClassNotFoundException, SQLException;
 
-    ArrayList<TopicInterface> getTopics() throws ClassNotFoundException, SQLException;
+    ArrayList<Topic> getTopics() throws ClassNotFoundException, SQLException;
 
-    TopicInterface getTopic(Integer id) throws ClassNotFoundException, SQLException;
+    Topic getTopic(Integer id) throws ClassNotFoundException, SQLException;
 
     void insertTopic(String name, String description) throws ClassNotFoundException, SQLException;
 
@@ -27,13 +27,13 @@ public interface DAO_Interface {
 
     void deleteTopic(Integer id) throws ClassNotFoundException, SQLException;
 
-    ArrayList<QuestionInterface> getQuestions() throws ClassNotFoundException, SQLException;
+    ArrayList<Question> getQuestions() throws ClassNotFoundException, SQLException;
 
-    QuestionInterface getQuestion(Integer id) throws ClassNotFoundException, SQLException;
-    
-    QuestionInterface getRandomQuestion() throws ClassNotFoundException, SQLException;
-    
-    QuestionInterface getRandomQuestion(Integer topicId) throws ClassNotFoundException, SQLException;
+    Question getQuestion(Integer id) throws ClassNotFoundException, SQLException;
+
+    Question getRandomQuestion() throws ClassNotFoundException, SQLException;
+
+    Question getRandomQuestion(Integer topicId) throws ClassNotFoundException, SQLException;
 
     void insertQuestion(String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException;
 

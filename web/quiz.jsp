@@ -1,7 +1,7 @@
-<%@page import="integration.DAO"%>
-<%@page import="business.TransferObjects.QuestionInterface"%>
+<%@page import="business.TransferObjects.QuestionInterface" %>
+<%@page import="integration.DAO" %>
 <%@include file="partials/header.jsp" %>
-<%    QuestionInterface question = (QuestionInterface) session.getAttribute("quizQuestion");
+<% QuestionInterface question = (QuestionInterface) session.getAttribute("quizQuestion");
     Integer questionId = question.getId();
     String title = question.getTitle();
     String answer_1 = question.getAnswer_1();
@@ -12,9 +12,12 @@
 %>
 
 <div class="col-md-8 col-md-offset-2">
-    <h4>Question: <small>(<%= counter%>) from (<%= DAO.quizQuestions%>)</small></h4>
+    <h4>Question:
+        <small>(<%= counter%>) from (<%= DAO.quizQuestions%>)</small>
+    </h4>
 
-    <h1 class="question-title"><%= title%></h1>
+    <h1 class="question-title"><%= title%>
+    </h1>
 
     <form method="post" action="/Relay">
         <input type="hidden" name="action" value="Quiz">
@@ -23,28 +26,28 @@
 
         <div class="radio">
             <label for="answer_1">
-                <input type="radio" value="1" name="answer" id="answer_1" />
+                <input type="radio" value="1" name="answer" id="answer_1"/>
                 <%=answer_1%>
             </label>
         </div>
 
         <div class="radio">
             <label for="answer_2">
-                <input type="radio" value="2" name="answer" id="answer_2" />
+                <input type="radio" value="2" name="answer" id="answer_2"/>
                 <%=answer_2%>
             </label>
         </div>
 
         <div class="radio">
             <label for="answer_3">
-                <input type="radio" value="3" name="answer" id="answer_3" />
+                <input type="radio" value="3" name="answer" id="answer_3"/>
                 <%=answer_3%>
             </label>
         </div>
 
         <div class="radio">
             <label for="answer_4">
-                <input type="radio" value="4" name="answer" id="answer_4" />
+                <input type="radio" value="4" name="answer" id="answer_4"/>
                 <%=answer_4%>
             </label>
         </div>

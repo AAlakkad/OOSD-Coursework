@@ -11,12 +11,11 @@ import java.util.HashMap;
  */
 public class DAO implements DAO_Interface {
 
+    // Quiz questions number to use app-wide
+    public final static Integer quizQuestions = 10;
     // Singleton object
     private static DAO theQuizDAO;
     private Connection databaseConnection;
-
-    // Quiz questions number to use app-wide
-    public final static Integer quizQuestions = 10;
 
     private DAO() {
     }
@@ -63,9 +62,9 @@ public class DAO implements DAO_Interface {
      * @throws SQLException
      */
     @Override
-    public UserInterface checkLogin(String username, String password)
+    public User checkLogin(String username, String password)
             throws ClassNotFoundException, SQLException {
-        UserInterface user = new User();
+        User user = new User();
         try {
             Statement myStatement = getConnection();
             String query = "SELECT username, type FROM users WHERE username like '" + username + "' AND password LIKE '" + password + "' LIMIT 1";
@@ -134,9 +133,9 @@ public class DAO implements DAO_Interface {
     }
 
     @Override
-    public ArrayList<TopicInterface> getTopics() throws ClassNotFoundException, SQLException {
+    public ArrayList<Topic> getTopics() throws ClassNotFoundException, SQLException {
         try {
-            ArrayList<TopicInterface> topics = new ArrayList<TopicInterface>();
+            ArrayList<Topic> topics = new ArrayList<Topic>();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM topics;";
             ResultSet results = myStatement.executeQuery(query1);
@@ -164,9 +163,9 @@ public class DAO implements DAO_Interface {
     }
 
     @Override
-    public TopicInterface getTopic(Integer id) throws ClassNotFoundException, SQLException {
+    public Topic getTopic(Integer id) throws ClassNotFoundException, SQLException {
         try {
-            TopicInterface topic = new Topic();
+            Topic topic = new Topic();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM topics WHERE id = " + id + " LIMIT 1;";
             ResultSet result = myStatement.executeQuery(query1);
@@ -237,9 +236,9 @@ public class DAO implements DAO_Interface {
     }
 
     @Override
-    public ArrayList<QuestionInterface> getQuestions() throws ClassNotFoundException, SQLException {
+    public ArrayList<Question> getQuestions() throws ClassNotFoundException, SQLException {
         try {
-            ArrayList<QuestionInterface> questions = new ArrayList<QuestionInterface>();
+            ArrayList<Question> questions = new ArrayList<Question>();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM questions;";
             ResultSet results = myStatement.executeQuery(query1);
@@ -273,9 +272,9 @@ public class DAO implements DAO_Interface {
     }
 
     @Override
-    public QuestionInterface getQuestion(Integer id) throws ClassNotFoundException, SQLException {
+    public Question getQuestion(Integer id) throws ClassNotFoundException, SQLException {
         try {
-            QuestionInterface question = new Question();
+            Question question = new Question();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM questions WHERE id = " + id + " LIMIT 1;";
             ResultSet result = myStatement.executeQuery(query1);
@@ -295,9 +294,9 @@ public class DAO implements DAO_Interface {
     }
 
     @Override
-    public QuestionInterface getRandomQuestion() throws ClassNotFoundException, SQLException {
+    public Question getRandomQuestion() throws ClassNotFoundException, SQLException {
         try {
-            QuestionInterface question = new Question();
+            Question question = new Question();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM questions ORDER BY RAND() LIMIT 1;";
             ResultSet result = myStatement.executeQuery(query1);
@@ -316,9 +315,9 @@ public class DAO implements DAO_Interface {
     }
 
     @Override
-    public QuestionInterface getRandomQuestion(Integer topicId) throws ClassNotFoundException, SQLException {
+    public Question getRandomQuestion(Integer topicId) throws ClassNotFoundException, SQLException {
         try {
-            QuestionInterface question = new Question();
+            Question question = new Question();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM questions WHERE topic_id = " + topicId + " ORDER BY RAND() LIMIT 1;";
             ResultSet result = myStatement.executeQuery(query1);
