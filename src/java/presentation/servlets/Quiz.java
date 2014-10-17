@@ -6,6 +6,8 @@
 package presentation.servlets;
 
 import business.TransferObjects.QuestionInterface;
+import business.TransferObjects.User;
+import business.TransferObjects.UserInterface;
 import integration.DAO;
 
 import javax.servlet.RequestDispatcher;
@@ -72,8 +74,8 @@ public class Quiz extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.setAttribute("quizTopicId", topicId);
 
-            RequestDispatcher rd = request.getRequestDispatcher("quiz.jsp");
-            rd.forward(request, response);
+//            RequestDispatcher rd = request.getRequestDispatcher("quiz.jsp");
+//            rd.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -153,8 +155,10 @@ public class Quiz extends HttpServlet {
                 Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            // Here: quiz counter not in range
-
+            // Here: quiz counter not in range (finish answering the quiz)
+            
+            // Save the result to database:
+            this.saveQuizScore(request, response);
             // display result
             RequestDispatcher rd = request.getRequestDispatcher("result.jsp");
             try {
@@ -174,6 +178,20 @@ public class Quiz extends HttpServlet {
         session.removeAttribute("quizTopicId");
         session.removeAttribute("questionsList");
         session.removeAttribute("quizQuestion");
+    }
+    
+    private void saveQuizScore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
+        DAO dao = DAO.getQuizDAO();
+        HttpSession session = request.getSession();
+        Integer quizTopicId = Integer.parseInt(session.getAttribute("quizTopicId").toString());
+        Double score = Double.parseDouble(session.getAttribute("quizScore").toString());
+        
+        // @TODO replace this with proper data for level 4
+        Integer difficultyId = 1;
+        
+        // save score to database
+        UserInterface user = (User) session.getAttribute("user");
+        dao.addScore(user.getId(), quizTopicId, difficultyId, score);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

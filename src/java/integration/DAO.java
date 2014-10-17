@@ -67,12 +67,13 @@ public class DAO implements DAO_Interface {
         User user = new User();
         try {
             Statement myStatement = getConnection();
-            String query = "SELECT username, type FROM users WHERE username like '" + username + "' AND password LIKE '" + password + "' LIMIT 1";
+            String query = "SELECT id, username, type FROM users WHERE username like '" + username + "' AND password LIKE '" + password + "' LIMIT 1";
             myStatement.executeQuery(query);
             ResultSet result = myStatement.getResultSet();
             if (result.next()) {
-                user.setUsername(result.getString(1));
-                user.setType(result.getString(2));
+                user.setId(result.getInt(1));
+                user.setUsername(result.getString(2));
+                user.setType(result.getString(3));
             }
             closeConnection();
         } catch (ClassNotFoundException cnfe) {
@@ -384,6 +385,23 @@ public class DAO implements DAO_Interface {
         try {
             Statement myStatement = getConnection();
             String query = "DELETE FROM questions WHERE id = " + id + " LIMIT 1;";
+            myStatement.executeUpdate(query);
+
+            closeConnection();
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+    }
+
+    @Override
+    public void addScore(Integer userId, Integer topicId, Integer difficulty_id, Double score) throws ClassNotFoundException, SQLException {
+        try {
+            Statement myStatement = getConnection();
+            String query = "INSERT INTO scores VALUES (NULL, " + userId + ", " + topicId + " ," + difficulty_id + ", " + score + ", NOW());";
             myStatement.executeUpdate(query);
 
             closeConnection();

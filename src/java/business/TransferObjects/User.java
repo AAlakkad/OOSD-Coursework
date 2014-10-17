@@ -5,6 +5,7 @@ package business.TransferObjects;
  */
 public class User implements UserInterface {
 
+    private Integer id;
     private String username, type;
 
     public User() {
@@ -13,6 +14,16 @@ public class User implements UserInterface {
     public User(String username, String type) {
         this.setUsername(username);
         this.setType(type);
+    }
+
+    @Override
+    public Integer getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override
