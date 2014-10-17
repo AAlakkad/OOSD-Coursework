@@ -1,7 +1,12 @@
 <%@page import="business.TransferObjects.QuestionInterface" %>
 <%@page import="integration.DAO" %>
 <%@include file="partials/header.jsp" %>
-<% QuestionInterface question = (QuestionInterface) session.getAttribute("quizQuestion");
+<%    
+    if (session.getAttribute("quizQuestion") == null) {
+        response.sendRedirect("/topic.jsp");
+        return;
+    }
+    QuestionInterface question = (QuestionInterface) session.getAttribute("quizQuestion");
     Integer questionId = question.getId();
     String title = question.getTitle();
     String answer_1 = question.getAnswer_1();

@@ -1,8 +1,13 @@
+<%@page import="integration.Authentication"%>
 <%@page import="business.TransferObjects.Topic" %>
 <%@page import="integration.DAO" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
 <%@include file="partials/header.jsp" %>
+<%    if (! Authentication.isLoggedIn(request)) {
+        Authentication.redirectLogIn(request, response);
+    }
+%>
 
 <div class="col-md-8 col-md-offset-2">
     <h1>Choose topic to start:</h1>

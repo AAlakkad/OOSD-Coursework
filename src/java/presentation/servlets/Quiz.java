@@ -113,7 +113,16 @@ public class Quiz extends HttpServlet {
         HttpSession session = request.getSession();
         // get current counter, it not set new one
         Integer quizCounter = session.getAttribute("quizCounter") != null ? Integer.parseInt(session.getAttribute("quizCounter").toString()) : 0;
-        Integer quizTopicId = session.getAttribute("quizTopicId") != null ? Integer.parseInt(session.getAttribute("quizTopicId").toString()) : 1;
+        Integer quizTopicId = session.getAttribute("quizTopicId") != null ? Integer.parseInt(session.getAttribute("quizTopicId").toString()) : 0;
+
+        // Redirect to topic.jsp if topic_id is not set in session
+        if (quizTopicId == 0) {
+            try {
+                response.sendRedirect("/topic.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
         // get questions list
         ArrayList<Integer> questions = session.getAttribute("questionsList") != null ? (ArrayList<Integer>) session.getAttribute("questionsList") : new ArrayList<>();

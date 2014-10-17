@@ -50,12 +50,18 @@ public class User implements UserInterface {
 
     @Override
     public Boolean isAdministrator() {
-        return this.type.equals("administrator");
+        if (this.type != null) {
+            return this.type.equals("administrator");
+        }
+        return false;
     }
 
     @Override
     public Boolean isContestant() {
-        return this.type.equals("contestant");
+        if (this.type != null) {
+            return this.type.equals("contestant");
+        }
+        return false;
     }
 
 }

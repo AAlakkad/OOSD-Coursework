@@ -1,8 +1,13 @@
+<%@page import="integration.Authentication"%>
 <%@page import="business.TransferObjects.Topic" %>
 <%@page import="integration.DAO" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
 <%@include file="../../partials/header.jsp" %>
+<%    if (!Authentication.isAdministrator(request)) {
+        Authentication.redirectLogIn(request, response);
+    }
+%>
 
 <h1>Topics <a href="./form.jsp" class="btn btn-sm btn-default">New Topic</a></h1>
 

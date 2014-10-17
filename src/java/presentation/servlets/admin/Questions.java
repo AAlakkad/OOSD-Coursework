@@ -5,6 +5,8 @@
  */
 package presentation.servlets.admin;
 
+//import Authentication;
+import integration.Authentication;
 import integration.DAO;
 
 import javax.servlet.ServletException;
@@ -32,6 +34,9 @@ public class Questions extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
+        if(! Authentication.isAdministrator(request)) {
+            Authentication.redirectLogIn(request, response);
+        }
         String subAction = request.getParameter("sub-action");
         switch (subAction) {
             case "new":
