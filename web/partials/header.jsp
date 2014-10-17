@@ -42,14 +42,11 @@
                         %>
                         <li><a href="/admin/topics/list.jsp">Topics</a></li>
                         <li><a href="/admin/questions/list.jsp">Questions</a></li>
-                        <li><a href="#contact">Changed</a></li>
                             <%
                             } else {
                                 // Load contestant menu
                             %>
                         <li><a href="/topic.jsp">Start quiz</a></li>
-                        <li><a>To</a></li>
-                        <li><a>Session</a></li>
                             <%
                                 }
                             %>
