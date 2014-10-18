@@ -37,6 +37,9 @@ public class Quiz extends HttpServlet {
                 case "choose_topic":
                     this.saveTopic(request, response);
                     break;
+                case "choose_difficulty":
+                    this.saveDifficulty(request, response);
+                    break;
                 case "submit_answer":
                     this.processAnswer(request, response);
                     break;
@@ -70,6 +73,32 @@ public class Quiz extends HttpServlet {
             Integer topicId = Integer.parseInt(request.getParameter("topic_id"));
             HttpSession session = request.getSession(true);
             session.setAttribute("quizTopicId", topicId);
+        } catch (Exception ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try {
+            // redirect to difficulty page
+            response.sendRedirect("/Relay?action=/difficulty.jsp");
+        } catch (IOException ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Save selected difficulty to Session
+     *
+     * @param request
+     * @param response
+     */
+    private void saveDifficulty(HttpServletRequest request, HttpServletResponse response) {
+        // Save topic to session
+        try {
+            // Empty session to prevent old session collision
+
+            Integer difficultyId = Integer.parseInt(request.getParameter("difficulty_id"));
+            HttpSession session = request.getSession(true);
+            session.setAttribute("quizDifficultyId", difficultyId);
         } catch (Exception ex) {
             Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -110,6 +139,7 @@ public class Quiz extends HttpServlet {
         // get current counter, it not set new one
         Integer quizCounter = session.getAttribute("quizCounter") != null ? Integer.parseInt(session.getAttribute("quizCounter").toString()) : 0;
         Integer quizTopicId = session.getAttribute("quizTopicId") != null ? Integer.parseInt(session.getAttribute("quizTopicId").toString()) : 0;
+        Integer quizDifficultyId = session.getAttribute("quizDifficultyId") != null ? Integer.parseInt(session.getAttribute("quizDifficultyId").toString()) : 0;
 
         // Redirect to topic.jsp if topic_id is not set in session
         if (quizTopicId == 0) {
@@ -126,7 +156,7 @@ public class Quiz extends HttpServlet {
         // if counter is in range
         if (quizCounter < DAO.quizQuestions) {
             // get random question
-            QuestionInterface randomQuestion = dao.getRandomQuestion(quizTopicId);
+            QuestionInterface randomQuestion = dao.getRandomQuestion(quizTopicId, quizDifficultyId);
 
             // save random question to session questionsList
             session.setAttribute("quizQuestion", randomQuestion);
@@ -178,7 +208,7 @@ public class Quiz extends HttpServlet {
         DAO dao = DAO.getQuizDAO();
         HttpSession session = request.getSession();
         Integer quizTopicId = Integer.parseInt(session.getAttribute("quizTopicId").toString());
-        Double score = Double.parseDouble(session.getAttribute("quizScore").toString());
+        Double score = session.getAttribute("quizScore") != null ? Double.parseDouble(session.getAttribute("quizScore").toString()) : 0;
 
         // @TODO replace this with proper data for level 4
         Integer difficultyId = 1;
@@ -191,7 +221,7 @@ public class Quiz extends HttpServlet {
     static public String compareResult(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String message = "We couldn't find your score for the selected topic, may be you didn't take a quiz in this topic yet?";
-        if(request.getParameter("topic_id") == null) {
+        if (request.getParameter("topic_id") == null) {
             message = "Please select topic first!";
             return message;
         }
@@ -209,7 +239,7 @@ public class Quiz extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return message;
     }
 

@@ -31,7 +31,7 @@ public interface DAO_Interface {
 
     Question getRandomQuestion() throws ClassNotFoundException, SQLException;
 
-    Question getRandomQuestion(Integer topicId) throws ClassNotFoundException, SQLException;
+    Question getRandomQuestion(Integer topicId, Integer difficultyId) throws ClassNotFoundException, SQLException;
 
     void insertQuestion(String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException;
 
