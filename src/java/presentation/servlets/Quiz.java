@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation.servlets;
 
 import business.TransferObjects.QuestionInterface;
@@ -22,9 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author ammar
- */
+
 public class Quiz extends HttpServlet {
 
     /**
@@ -73,9 +66,6 @@ public class Quiz extends HttpServlet {
             Integer topicId = Integer.parseInt(request.getParameter("topic_id"));
             HttpSession session = request.getSession(true);
             session.setAttribute("quizTopicId", topicId);
-
-//            RequestDispatcher rd = request.getRequestDispatcher("quiz.jsp");
-//            rd.forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,7 +146,7 @@ public class Quiz extends HttpServlet {
             }
         } else {
             // Here: quiz counter not in range (finish answering the quiz)
-            
+
             // Save the result to database:
             this.saveQuizScore(request, response);
             // display result
@@ -179,16 +169,16 @@ public class Quiz extends HttpServlet {
         session.removeAttribute("questionsList");
         session.removeAttribute("quizQuestion");
     }
-    
+
     private void saveQuizScore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
         DAO dao = DAO.getQuizDAO();
         HttpSession session = request.getSession();
         Integer quizTopicId = Integer.parseInt(session.getAttribute("quizTopicId").toString());
         Double score = Double.parseDouble(session.getAttribute("quizScore").toString());
-        
+
         // @TODO replace this with proper data for level 4
         Integer difficultyId = 1;
-        
+
         // save score to database
         UserInterface user = (User) session.getAttribute("user");
         dao.addScore(user.getId(), quizTopicId, difficultyId, score);

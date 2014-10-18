@@ -6,9 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * @author ammar
- */
+
 public class DAO implements DAO_Interface {
 
     // Quiz questions number to use app-wide
@@ -185,12 +183,13 @@ public class DAO implements DAO_Interface {
         }
     }
 
-    @Override
-    public void updateTopic(Integer id, String name, String description) throws ClassNotFoundException, SQLException {
+    /**
+     * Execute a query that don't return anything, e.g. insert, update, or delete
+     */
+    private void executeQuery(String query) throws ClassNotFoundException, SQLException {
         try {
             Statement myStatement = getConnection();
-            String query1 = "UPDATE topics SET name='" + name + "', description='" + description + "' WHERE id = " + id + " LIMIT 1;";
-            myStatement.executeUpdate(query1);
+            myStatement.executeUpdate(query);
 
             closeConnection();
         } catch (ClassNotFoundException cnfe) {
@@ -200,40 +199,25 @@ public class DAO implements DAO_Interface {
             System.out.println(sqle);
             throw sqle;
         }
+    }
+
+
+    @Override
+    public void updateTopic(Integer id, String name, String description) throws ClassNotFoundException, SQLException {
+        String query1 = "UPDATE topics SET name='" + name + "', description='" + description + "' WHERE id = " + id + " LIMIT 1;";
+        this.executeQuery(query1);
     }
 
     @Override
     public void insertTopic(String name, String description) throws ClassNotFoundException, SQLException {
-        try {
-            Statement myStatement = getConnection();
-            String query = "INSERT INTO topics (name, description, create_date) VALUES('" + name + "', '" + description + "', NOW());";
-            myStatement.executeUpdate(query);
-
-            closeConnection();
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println(cnfe);
-            throw cnfe;
-        } catch (SQLException sqle) {
-            System.out.println(sqle);
-            throw sqle;
-        }
+        String query = "INSERT INTO topics (name, description, create_date) VALUES('" + name + "', '" + description + "', NOW());";
+        this.executeQuery(query);
     }
 
     @Override
     public void deleteTopic(Integer id) throws ClassNotFoundException, SQLException {
-        try {
-            Statement myStatement = getConnection();
-            String query = "DELETE FROM topics WHERE id = " + id + " LIMIT 1;";
-            myStatement.executeUpdate(query);
-
-            closeConnection();
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println(cnfe);
-            throw cnfe;
-        } catch (SQLException sqle) {
-            System.out.println(sqle);
-            throw sqle;
-        }
+        String query = "DELETE FROM topics WHERE id = " + id + " LIMIT 1;";
+        this.executeQuery(query);
     }
 
     @Override
@@ -339,79 +323,34 @@ public class DAO implements DAO_Interface {
 
     @Override
     public void insertQuestion(String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException {
-        try {
-            Statement myStatement = getConnection();
-            String query1 = "INSERT INTO questions VALUES(NULL, " + topicId + ", " + difficultyId + ", '" + title + "', " + correctAnswer + ", '" + answer_1 + "', '" + answer_2 + "', '" + answer_3 + "', '" + answer_4 + "', NOW());";
-            System.out.println(query1);
-            myStatement.executeUpdate(query1);
-
-            closeConnection();
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println(cnfe);
-            throw cnfe;
-        } catch (SQLException sqle) {
-            System.out.println(sqle);
-            throw sqle;
-        }
+        String query1 = "INSERT INTO questions VALUES(NULL, " + topicId + ", " + difficultyId + ", '" + title + "', " + correctAnswer + ", '" + answer_1 + "', '" + answer_2 + "', '" + answer_3 + "', '" + answer_4 + "', NOW());";
+        this.executeQuery(query1);
     }
 
     @Override
     public void updateQuestion(Integer id, String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException {
-        try {
-            Statement myStatement = getConnection();
-            String query1 = "UPDATE questions SET title='" + title + "', "
-                    + "topic_id='" + topicId + "', "
-                    + "difficulty_id='" + difficultyId + "', "
-                    + "correct_answer='" + correctAnswer + "', "
-                    + "answer_1='" + answer_1 + "', "
-                    + "answer_2='" + answer_2 + "', "
-                    + "answer_3='" + answer_3 + "', "
-                    + "answer_4='" + answer_4 + "'"
-                    + " WHERE id = " + id + " LIMIT 1;";
-            myStatement.executeUpdate(query1);
-
-            closeConnection();
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println(cnfe);
-            throw cnfe;
-        } catch (SQLException sqle) {
-            System.out.println(sqle);
-            throw sqle;
-        }
+        String query1 = "UPDATE questions SET title='" + title + "', "
+                + "topic_id='" + topicId + "', "
+                + "difficulty_id='" + difficultyId + "', "
+                + "correct_answer='" + correctAnswer + "', "
+                + "answer_1='" + answer_1 + "', "
+                + "answer_2='" + answer_2 + "', "
+                + "answer_3='" + answer_3 + "', "
+                + "answer_4='" + answer_4 + "'"
+                + " WHERE id = " + id + " LIMIT 1;";
+        this.executeQuery(query1);
     }
 
     @Override
     public void deleteQuestion(Integer id) throws ClassNotFoundException, SQLException {
-        try {
-            Statement myStatement = getConnection();
-            String query = "DELETE FROM questions WHERE id = " + id + " LIMIT 1;";
-            myStatement.executeUpdate(query);
-
-            closeConnection();
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println(cnfe);
-            throw cnfe;
-        } catch (SQLException sqle) {
-            System.out.println(sqle);
-            throw sqle;
-        }
+        String query = "DELETE FROM questions WHERE id = " + id + " LIMIT 1;";
+        this.executeQuery(query);
     }
 
     @Override
     public void addScore(Integer userId, Integer topicId, Integer difficulty_id, Double score) throws ClassNotFoundException, SQLException {
-        try {
-            Statement myStatement = getConnection();
-            String query = "INSERT INTO scores VALUES (NULL, " + userId + ", " + topicId + " ," + difficulty_id + ", " + score + ", NOW());";
-            myStatement.executeUpdate(query);
-
-            closeConnection();
-        } catch (ClassNotFoundException cnfe) {
-            System.out.println(cnfe);
-            throw cnfe;
-        } catch (SQLException sqle) {
-            System.out.println(sqle);
-            throw sqle;
-        }
+        String query = "INSERT INTO scores VALUES (NULL, " + userId + ", " + topicId + " ," + difficulty_id + ", " + score + ", NOW());";
+        this.executeQuery(query);
     }
 
 }

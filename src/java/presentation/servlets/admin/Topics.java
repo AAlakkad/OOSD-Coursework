@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation.servlets.admin;
 
 import integration.DAO;
@@ -16,9 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author ammar
- */
+
 public class Topics extends HttpServlet {
 
     /**
@@ -43,7 +36,7 @@ public class Topics extends HttpServlet {
                 this.processDelete(request);
                 break;
         }
-        response.sendRedirect("/admin/topics/index.jsp");
+        response.sendRedirect("/Relay?action=/admin/topics/index.jsp");
 
     }
 

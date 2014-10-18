@@ -1,12 +1,10 @@
 package business.TransferObjects;
 
-/**
- * @author ammar
- */
+
 public interface UserInterface {
-    
+
     Integer getId();
-    
+
     void setId(Integer id);
 
     String getUsername();

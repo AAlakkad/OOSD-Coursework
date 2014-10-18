@@ -9,7 +9,7 @@
     }
 %>
 
-<h1>Topics <a href="./form.jsp" class="btn btn-sm btn-default">New Topic</a></h1>
+<h1>Topics <a href="/Relay?action=/admin/topics/form.jsp" class="btn btn-sm btn-default">New Topic</a></h1>
 
 
 <table class="table table-bordered table-hover">
@@ -35,7 +35,7 @@
             <td><%=aTopic.getName()%>
             </td>
             <td>
-                <a href="./form.jsp?id=<%=aTopic.getId()%>" class="btn btn-success">Edit</a>
+                <a href="/Relay?action=/admin/topics/form.jsp&id=<%=aTopic.getId()%>" class="btn btn-success">Edit</a>
             </td>
         </tr>
         <%

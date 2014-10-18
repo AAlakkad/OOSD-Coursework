@@ -1,8 +1,6 @@
 package business.TransferObjects;
 
-/**
- * @author ammar
- */
+
 public class User implements UserInterface {
 
     private Integer id;

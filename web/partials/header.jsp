@@ -40,13 +40,14 @@
                             if (user.isAdministrator()) {
                                 // Load administrator menu
                         %>
-                        <li><a href="/admin/topics/list.jsp">Topics</a></li>
-                        <li><a href="/admin/questions/list.jsp">Questions</a></li>
+                        <li><a href="/Relay?action=admin/topics/index.jsp">Topics</a></li>
+                        <li><a href="/Relay?action=admin/questions/index.jsp">Questions</a></li>
                             <%
                             } else {
                                 // Load contestant menu
                             %>
-                        <li><a href="/topic.jsp">Start quiz</a></li>
+                        <li><a href="/Relay?action=topic.jsp">Start quiz</a></li>
+                        <li><a href="/Relay?action=compare.jsp">Compare your result</a></li>
                             <%
                                 }
                             %>

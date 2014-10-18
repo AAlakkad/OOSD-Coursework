@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package presentation.servlets.admin;
 
 //import Authentication;
@@ -18,9 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * @author ammar
- */
+
 public class Questions extends HttpServlet {
 
     /**
@@ -49,7 +42,8 @@ public class Questions extends HttpServlet {
                 this.processDelete(request);
                 break;
         }
-        response.sendRedirect("/admin/questions/index.jsp");
+        response.sendRedirect("/Relay?action=/admin/questions/index.jsp");
+        return;
     }
 
     private void processNew(HttpServletRequest request) throws ClassNotFoundException {
@@ -65,7 +59,7 @@ public class Questions extends HttpServlet {
         DAO dao = DAO.getQuizDAO();
         try {
             dao.insertQuestion(title, topicId, difficultyId, correctAnswer, answer_1, answer_2, answer_3, answer_4);
-
+            System.out.println("Why I'm not typing fast?");
         } catch (SQLException ex) {
             Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
         }
