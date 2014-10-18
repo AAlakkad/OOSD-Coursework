@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
         HttpSession session = request.getSession();
         if (!user.exists()) {
             session.setAttribute("error", "Invalid username or password");
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("/Relay?action=login.jsp");
         } else {
             session.setAttribute("user", user);
             response.sendRedirect("/");
