@@ -303,7 +303,6 @@ public class DAO implements DAO_Interface {
             Question question = new Question();
             Statement myStatement = getConnection();
             String query1 = "SELECT * FROM questions WHERE topic_id = " + topicId + " AND difficulty_id = " + difficultyId + " ORDER BY RAND() LIMIT 1;";
-            System.out.println(query1);
             ResultSet result = myStatement.executeQuery(query1);
             if (result.next()) {
                 question = populateQuestionObject(result);

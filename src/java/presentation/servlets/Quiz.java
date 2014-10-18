@@ -1,5 +1,6 @@
 package presentation.servlets;
 
+import business.TransferObjects.Question;
 import business.TransferObjects.QuestionInterface;
 import business.TransferObjects.TopicInterface;
 import business.TransferObjects.User;
@@ -43,6 +44,9 @@ public class Quiz extends HttpServlet {
                 case "submit_answer":
                     this.processAnswer(request, response);
                     break;
+                case "discard_answers":
+                    this.discardAnswers(request, response);
+                    break;
                 case "compare":
                     this.compareResult(request, response);
                     break;
@@ -76,7 +80,7 @@ public class Quiz extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             // redirect to difficulty page
             response.sendRedirect("/Relay?action=/difficulty.jsp");
@@ -84,7 +88,7 @@ public class Quiz extends HttpServlet {
             Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * Save selected difficulty to Session
      *
@@ -118,10 +122,19 @@ public class Quiz extends HttpServlet {
         // get answer number parameter
         Integer contestantAnswer = request.getParameter("answer") != null ? Integer.parseInt(request.getParameter("answer")) : 0;
         if (contestantAnswer == question.getCorrectAnswer()) {
-            Integer quizScore = session.getAttribute("quizScore") != null ? Integer.parseInt(session.getAttribute("quizScore").toString()) : 0;
+            Double quizScore = session.getAttribute("quizScore") != null ? Double.parseDouble(session.getAttribute("quizScore").toString()) : 0;
             // increase 1 to the result in session
-            session.setAttribute("quizScore", ++quizScore);
+            Boolean answersDiscarded = session.getAttribute("answersDiscarded") != null ? Boolean.parseBoolean(session.getAttribute("answersDiscarded").toString()) : false;
+            if (answersDiscarded) {
+                quizScore += 0.5;
+            } else {
+                quizScore++;
+            }
+            // Save updated score in the session
+            session.setAttribute("quizScore", quizScore);
         }
+        // Remove indicator for answersDiscared, so discarding button could appear in the next question
+        session.removeAttribute("answersDiscarded");
         // forward to answer next question (call this.processQuestions)
         try {
             this.processQuestions(request, response);
@@ -202,16 +215,15 @@ public class Quiz extends HttpServlet {
         session.removeAttribute("quizTopicId");
         session.removeAttribute("questionsList");
         session.removeAttribute("quizQuestion");
+        session.removeAttribute("answersDiscarded");
     }
 
     private void saveQuizScore(HttpServletRequest request, HttpServletResponse response) throws ClassNotFoundException, SQLException {
         DAO dao = DAO.getQuizDAO();
         HttpSession session = request.getSession();
         Integer quizTopicId = Integer.parseInt(session.getAttribute("quizTopicId").toString());
+        Integer difficultyId = session.getAttribute("difficultyId") != null ? Integer.parseInt(session.getAttribute("difficultyId").toString()) : 1;
         Double score = session.getAttribute("quizScore") != null ? Double.parseDouble(session.getAttribute("quizScore").toString()) : 0;
-
-        // @TODO replace this with proper data for level 4
-        Integer difficultyId = 1;
 
         // save score to database
         UserInterface user = (User) session.getAttribute("user");
@@ -241,6 +253,65 @@ public class Quiz extends HttpServlet {
         }
 
         return message;
+    }
+
+    /**
+     * Discard randomly 2 incorrect answers
+     *
+     * @param request [description]
+     * @param response [description]
+     */
+    private void discardAnswers(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        Boolean answersDiscarded = session.getAttribute("answersDiscarded") != null ? Boolean.parseBoolean(session.getAttribute("answersDiscarded").toString()) : false;
+        if (!answersDiscarded) {
+
+            // get question from session
+            QuestionInterface question = (Question) session.getAttribute("quizQuestion");
+
+            // get the correct answer
+            Integer correctAnswer = question.getCorrectAnswer();
+
+            // get random number between 1-4 and not equal the correct answer
+            Integer firstRandomIncorrectAnswer = Helper.getRandomNumber(1, 4, correctAnswer);
+            Integer secondRandomIncorrectAnswer = Helper.getRandomNumber(1, 4, correctAnswer, firstRandomIncorrectAnswer);
+
+            // update question in session by making the 2 incorrect answer = null
+            question = this.discardOneQuestion(question, firstRandomIncorrectAnswer);
+            question = this.discardOneQuestion(question, secondRandomIncorrectAnswer);
+
+            // save question to session
+            session.setAttribute("quizQuestion", question);
+            // save indicator to session, to hide discarding answers button
+            session.setAttribute("answersDiscarded", true);
+        }
+        // redirect to the question page
+        RequestDispatcher rd = request.getRequestDispatcher("quiz.jsp");
+        try {
+            rd.forward(request, response);
+        } catch (ServletException ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private QuestionInterface discardOneQuestion(QuestionInterface question, Integer incorrectAnswer) {
+        switch (incorrectAnswer) {
+            case 1:
+                question.setAnswer_1(null);
+                break;
+            case 2:
+                question.setAnswer_2(null);
+                break;
+            case 3:
+                question.setAnswer_3(null);
+                break;
+            case 4:
+                question.setAnswer_4(null);
+                break;
+        }
+        return question;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

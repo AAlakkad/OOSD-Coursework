@@ -10,6 +10,7 @@
 <h1>
     <small>Your score is:</small>
     <%= score%>
+    points!
 </h1>
 <h2>You're the (first/second/third) score in <em><%= topic.getName()%></em> topic</h2>
 <%@include file="partials/footer.jsp" %>
