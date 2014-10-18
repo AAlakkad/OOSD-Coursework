@@ -12,7 +12,8 @@ public class Helper {
      * @param contestantScore
      * @return String
      *
-     * Original source: http://www.javalobby.org/forums/thread.jspa?threadID=16906&tstart=0
+     * Original source for this method: http://www.javalobby.org/forums/thread.jspa?threadID=16906&tstart=0
+     * I've updated it a little to be more useful
      */
     public static String getOrdinalFor(Integer contestantScore) {
         int hundredRemainder = contestantScore % 100;
