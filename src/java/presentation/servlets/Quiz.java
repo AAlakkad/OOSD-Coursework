@@ -1,6 +1,7 @@
 package presentation.servlets;
 
 import business.TransferObjects.QuestionInterface;
+import business.TransferObjects.TopicInterface;
 import business.TransferObjects.User;
 import business.TransferObjects.UserInterface;
 import integration.DAO;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import presentation.Helper;
 
 public class Quiz extends HttpServlet {
 
@@ -38,6 +39,9 @@ public class Quiz extends HttpServlet {
                     break;
                 case "submit_answer":
                     this.processAnswer(request, response);
+                    break;
+                case "compare":
+                    this.compareResult(request, response);
                     break;
             }
         } else {
@@ -182,6 +186,31 @@ public class Quiz extends HttpServlet {
         // save score to database
         UserInterface user = (User) session.getAttribute("user");
         dao.addScore(user.getId(), quizTopicId, difficultyId, score);
+    }
+
+    static public String compareResult(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String message = "We couldn't find your score for the selected topic, may be you didn't take a quiz in this topic yet?";
+        if(request.getParameter("topic_id") == null) {
+            message = "Please select topic first!";
+            return message;
+        }
+        // get topicId
+        Integer topicId = Integer.parseInt(request.getParameter("topic_id").toString());
+        UserInterface user = (User) session.getAttribute("user");
+        DAO dao = DAO.getQuizDAO();
+        try {
+            Integer contestantScore = dao.getScoreOrder(user.getId(), topicId);
+            TopicInterface topic = dao.getTopic(topicId);
+            String ordinal = Helper.getOrdinalFor(contestantScore);
+            message = "You are " + ordinal + " scorer in " + topic.getName() + " topic!";
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return message;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
