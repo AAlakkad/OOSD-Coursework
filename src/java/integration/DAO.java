@@ -6,11 +6,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 public class DAO implements DAO_Interface {
 
     // Quiz questions number to use app-wide
-    public final static Integer quizQuestions = 10;
+    public final static Integer quizQuestions = 5;
     // Singleton object
     private static DAO theQuizDAO;
     private Connection databaseConnection;
@@ -201,7 +200,6 @@ public class DAO implements DAO_Interface {
         }
     }
 
-
     @Override
     public void updateTopic(Integer id, String name, String description) throws ClassNotFoundException, SQLException {
         String query1 = "UPDATE topics SET name='" + name + "', description='" + description + "' WHERE id = " + id + " LIMIT 1;";
@@ -351,6 +349,29 @@ public class DAO implements DAO_Interface {
     public void addScore(Integer userId, Integer topicId, Integer difficulty_id, Double score) throws ClassNotFoundException, SQLException {
         String query = "INSERT INTO scores VALUES (NULL, " + userId + ", " + topicId + " ," + difficulty_id + ", " + score + ", NOW());";
         this.executeQuery(query);
+    }
+
+    public Integer getScoreOrder(Integer userId, Integer topicId) throws ClassNotFoundException, SQLException {
+        Integer order = 0;
+        try {
+            Statement myStatement = getConnection();
+            String query1 = "SELECT user_id, score FROM scores WHERE topic_id = " + topicId + " GROUP BY user_id ORDER BY score desc;";
+            ResultSet result = myStatement.executeQuery(query1);
+            while (result.next()) {
+                if (result.getInt(1) == userId) {
+                    order = result.getRow();
+                    break;
+                }
+            }
+            closeConnection();
+        } catch (ClassNotFoundException cnfe) {
+            System.out.println(cnfe);
+            throw cnfe;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+            throw sqle;
+        }
+        return order;
     }
 
 }
