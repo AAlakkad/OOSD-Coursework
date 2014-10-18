@@ -5,10 +5,8 @@
 <%@page import="java.util.HashMap" %>
 <%@page import="java.util.Iterator" %>
 <%@include file="../../partials/header.jsp" %>
-<%    if (!Authentication.isAdministrator(request)) {
-        Authentication.redirectLogIn(request, response);
-    }
-%>
+
+<%  Authentication.mustBeAdministrator(request, response);%>
 
 <% String id = request.getParameter("id");
     String subAction = "new";

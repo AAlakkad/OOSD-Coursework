@@ -5,10 +5,7 @@
 <%@page import="java.util.Iterator" %>
 <%@include file="../../partials/header.jsp" %>
 
-<%    if (!Authentication.isAdministrator(request)) {
-        Authentication.redirectLogIn(request, response);
-    }
-%>
+<%  Authentication.mustBeAdministrator(request, response);%>
 
 <h1>Questions <a href="/Relay?action=/admin/questions/form.jsp" class="btn btn-sm btn-default">New Question</a></h1>
 

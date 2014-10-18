@@ -3,10 +3,9 @@
 <%@page import="business.TransferObjects.TopicInterface" %>
 <%@ page import="integration.DAO" %>
 <%@include file="../../partials/header.jsp" %>
-<%    if (!Authentication.isAdministrator(request)) {
-        Authentication.redirectLogIn(request, response);
-    }
-%>
+
+<%  Authentication.mustBeAdministrator(request, response);%>
+
 <% String id = request.getParameter("id");
     String subAction = "new";
     String name = "", description = "";

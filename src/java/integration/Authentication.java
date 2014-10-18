@@ -51,4 +51,16 @@ public class Authentication {
             Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void mustBeLoggedIn(HttpServletRequest request, HttpServletResponse response) {
+        if(! isLoggedIn(request)) {
+            redirectLogIn(request, response);
+        }
+    }
+    
+    public static void mustBeAdministrator(HttpServletRequest request, HttpServletResponse response) {
+        if(! isAdministrator(request)) {
+            redirectLogIn(request, response);
+        }
+    }
 }

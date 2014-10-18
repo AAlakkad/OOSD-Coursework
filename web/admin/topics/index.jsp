@@ -4,10 +4,8 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
 <%@include file="../../partials/header.jsp" %>
-<%    if (!Authentication.isAdministrator(request)) {
-        Authentication.redirectLogIn(request, response);
-    }
-%>
+
+<%  Authentication.mustBeAdministrator(request, response);%>
 
 <h1>Topics <a href="/Relay?action=/admin/topics/form.jsp" class="btn btn-sm btn-default">New Topic</a></h1>
 

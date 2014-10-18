@@ -1,6 +1,8 @@
+<%@page import="integration.Authentication"%>
 <%@page import="business.TransferObjects.QuestionInterface" %>
 <%@page import="integration.DAO" %>
 <%@include file="partials/header.jsp" %>
+<%  Authentication.mustBeLoggedIn(request, response);%>
 <%    
     if (session.getAttribute("quizQuestion") == null) {
         response.sendRedirect("/topic.jsp");
