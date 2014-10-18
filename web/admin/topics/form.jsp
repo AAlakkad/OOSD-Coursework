@@ -2,7 +2,6 @@
 <%@page import="business.TransferObjects.Topic" %>
 <%@page import="business.TransferObjects.TopicInterface" %>
 <%@ page import="integration.DAO" %>
-<%@include file="../../partials/header.jsp" %>
 
 <%  Authentication.mustBeAdministrator(request, response);%>
 
@@ -19,6 +18,9 @@
         description = topic.getDescription();
     }
 %>
+
+<%@include file="../../partials/header.jsp" %>
+
 <h1><a href="./index.jsp">Topics</a>
     <small>&raquo; <%= subAction%>
     </small>

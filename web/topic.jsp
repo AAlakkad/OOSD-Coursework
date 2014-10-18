@@ -3,9 +3,10 @@
 <%@page import="integration.DAO" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
-<%@include file="partials/header.jsp" %>
+
 <%  Authentication.mustBeLoggedIn(request, response);%>
 
+<%@include file="partials/header.jsp" %>
 <div class="col-md-8 col-md-offset-2">
     <h1>Choose topic to start:</h1>
 

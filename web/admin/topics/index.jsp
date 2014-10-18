@@ -3,9 +3,10 @@
 <%@page import="integration.DAO" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
-<%@include file="../../partials/header.jsp" %>
 
 <%  Authentication.mustBeAdministrator(request, response);%>
+
+<%@include file="../../partials/header.jsp" %>
 
 <h1>Topics <a href="/Relay?action=/admin/topics/form.jsp" class="btn btn-sm btn-default">New Topic</a></h1>
 

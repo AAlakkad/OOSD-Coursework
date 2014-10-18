@@ -3,12 +3,12 @@
 <%@page import="integration.DAO" %>
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
-<%@include file="../../partials/header.jsp" %>
 
 <%  Authentication.mustBeAdministrator(request, response);%>
 
-<h1>Questions <a href="/Relay?action=/admin/questions/form.jsp" class="btn btn-sm btn-default">New Question</a></h1>
+<%@include file="../../partials/header.jsp" %>
 
+<h1>Questions <a href="/Relay?action=/admin/questions/form.jsp" class="btn btn-sm btn-default">New Question</a></h1>
 
 <table class="table table-bordered table-hover">
     <thead>

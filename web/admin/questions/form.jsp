@@ -4,7 +4,6 @@
 <%@page import="integration.DAO" %>
 <%@page import="java.util.HashMap" %>
 <%@page import="java.util.Iterator" %>
-<%@include file="../../partials/header.jsp" %>
 
 <%  Authentication.mustBeAdministrator(request, response);%>
 
@@ -34,6 +33,9 @@
         answer_4 = question.getAnswer_4();
     }
 %>
+
+<%@include file="../../partials/header.jsp" %>
+
 <h1><a href="./index.jsp">Questions</a>
     <small>&raquo; <%= subAction%>
     </small>

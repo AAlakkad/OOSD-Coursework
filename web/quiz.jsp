@@ -1,7 +1,6 @@
 <%@page import="integration.Authentication"%>
 <%@page import="business.TransferObjects.QuestionInterface" %>
 <%@page import="integration.DAO" %>
-<%@include file="partials/header.jsp" %>
 <%  Authentication.mustBeLoggedIn(request, response);%>
 <%    
     if (session.getAttribute("quizQuestion") == null) {
@@ -17,6 +16,8 @@
     String answer_4 = question.getAnswer_4();
     String counter = session.getAttribute("quizCounter") != null ? session.getAttribute("quizCounter").toString() : "1";
 %>
+
+<%@include file="partials/header.jsp" %>
 
 <div class="col-md-8 col-md-offset-2">
     <h4>Question:
