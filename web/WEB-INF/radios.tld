@@ -1,0 +1,15 @@
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>My Custom Tag</short-name>
+    <tag>
+        <name>itemsRadio</name>
+        <tag-class>presentation.RadiosTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>tabletype</name>
+            <required>yes</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+</taglib>

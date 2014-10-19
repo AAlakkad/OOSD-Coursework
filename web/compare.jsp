@@ -1,3 +1,5 @@
+<%@ taglib prefix="quiz" uri="WEB-INF/radios.tld"%>
+
 <%@page import="presentation.servlets.Quiz"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="business.TransferObjects.Topic"%>
@@ -32,22 +34,8 @@ if(request.getParameter("sub_action") != null) {
             }
         %>
 
-        <% DAO dao = DAO.getQuizDAO();
-            ArrayList topics = dao.getTopics();
-            Topic aTopic;
-            Iterator i = topics.iterator();
-            while (i.hasNext()) {
-                aTopic = (Topic) i.next();
-        %>
-        <div class="radio">
-            <label for="topic_<%= aTopic.getId()%>">
-                <input type="radio" value="<%=aTopic.getId()%>" name="topic_id" id="topic_<%= aTopic.getId()%>"/>
-                <%=aTopic.getName()%>
-            </label>
-        </div>
-        <%
-            }
-        %>
+        <quiz:itemsRadio tabletype="topics"/>
+        
         <input type="submit" value="Compare!" class="btn btn-success">
     </form>
 </div>
