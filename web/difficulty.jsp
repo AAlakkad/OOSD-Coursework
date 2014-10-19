@@ -16,7 +16,7 @@
         <input type="hidden" name="action" value="Quiz">
         <input type="hidden" name="sub_action" value="choose_difficulty">
 
-        <quiz:itemsRadio tabletype="difficulties`"/>
+        <quiz:itemsRadio tabletype="difficulties"/>
         
         <input type="submit" value="Start!" class="btn btn-success">
     </form>
