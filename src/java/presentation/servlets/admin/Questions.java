@@ -26,11 +26,11 @@ public class Questions extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.ClassNotFoundException if class not found
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
-        if(! Authentication.isAdministrator(request)) {
+        if (!Authentication.isAdministrator(request)) {
             Authentication.redirectLogIn(request, response);
         }
         String subAction = request.getParameter("sub-action");
@@ -62,7 +62,6 @@ public class Questions extends HttpServlet {
         DAO dao = DAO.getQuizDAO();
         try {
             dao.insertQuestion(title, topicId, difficultyId, correctAnswer, answer_1, answer_2, answer_3, answer_4);
-            System.out.println("Why I'm not typing fast?");
         } catch (SQLException ex) {
             Logger.getLogger(Questions.class.getName()).log(Level.SEVERE, null, ex);
         }

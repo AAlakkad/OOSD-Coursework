@@ -18,15 +18,15 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param id
-     * @param topicId
-     * @param difficultyId
-     * @param correctAnswer
-     * @param title
-     * @param answer_1
-     * @param answer_2
-     * @param answer_3
-     * @param answer_4
+     * @param id id
+     * @param topicId topic id
+     * @param difficultyId difficulty id
+     * @param correctAnswer correct answer
+     * @param title title
+     * @param answer_1 answer 1
+     * @param answer_2 answer 2
+     * @param answer_3 answer 3
+     * @param answer_4 answer 4
      */
     public Question(Integer id, Integer topicId, Integer difficultyId, Integer correctAnswer, String title, String answer_1, String answer_2, String answer_3, String answer_4) {
         this.setId(id);
@@ -42,7 +42,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return id
      */
     @Override
     public Integer getId() {
@@ -51,7 +51,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param id
+     * @param id id
      */
     @Override
     public void setId(Integer id) {
@@ -60,7 +60,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return topic id
      */
     @Override
     public Integer getTopicId() {
@@ -69,7 +69,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param topicId
+     * @param topicId topic id
      */
     @Override
     public void setTopicId(Integer topicId) {
@@ -78,7 +78,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return difficulty id
      */
     @Override
     public Integer getDifficultyId() {
@@ -87,7 +87,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param difficultyId
+     * @param difficultyId difficulty id
      */
     @Override
     public void setDifficultyId(Integer difficultyId) {
@@ -96,7 +96,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return title
      */
     @Override
     public String getTitle() {
@@ -105,7 +105,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param title
+     * @param title title
      */
     @Override
     public void setTitle(String title) {
@@ -114,7 +114,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return correct answer
      */
     @Override
     public Integer getCorrectAnswer() {
@@ -123,7 +123,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param correctAnswer
+     * @param correctAnswer correct answer
      */
     @Override
     public void setCorrectAnswer(Integer correctAnswer) {
@@ -132,7 +132,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * // * @return answer 1
      */
     @Override
     public String getAnswer_1() {
@@ -141,7 +141,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param answer
+     * @param answer answer
      */
     @Override
     public void setAnswer_1(String answer) {
@@ -150,7 +150,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return answer 2
      */
     @Override
     public String getAnswer_2() {
@@ -159,7 +159,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param answer
+     * @param answer answer
      */
     @Override
     public void setAnswer_2(String answer) {
@@ -168,7 +168,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return answer 3
      */
     @Override
     public String getAnswer_3() {
@@ -177,7 +177,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param answer
+     * @param answer answer
      */
     @Override
     public void setAnswer_3(String answer) {
@@ -186,7 +186,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @return
+     * @return answer 4
      */
     @Override
     public String getAnswer_4() {
@@ -195,7 +195,7 @@ public final class Question implements QuestionInterface {
 
     /**
      *
-     * @param answer
+     * @param answer answer 4
      */
     @Override
     public void setAnswer_4(String answer) {

@@ -17,8 +17,8 @@ public class User implements UserInterface {
 
     /**
      *
-     * @param username
-     * @param type
+     * @param username username
+     * @param type type
      */
     public User(String username, String type) {
         this.setUsername(username);
@@ -27,7 +27,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @return
+     * @return id
      */
     @Override
     public Integer getId() {
@@ -36,7 +36,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @param id
+     * @param id id
      */
     @Override
     public void setId(Integer id) {
@@ -45,7 +45,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @return
+     * @return username
      */
     @Override
     public String getUsername() {
@@ -54,7 +54,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @param username
+     * @param username username
      */
     @Override
     public void setUsername(String username) {
@@ -63,7 +63,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @return
+     * @return type
      */
     @Override
     public String getType() {
@@ -72,7 +72,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @param type
+     * @param type type
      */
     @Override
     public void setType(String type) {
@@ -81,8 +81,8 @@ public class User implements UserInterface {
 
     /**
      *
-     * @param topicId
-     * @return
+     * @param topicId topic id
+     * @return score
      */
     @Override
     public int getScore(int topicId) {
@@ -91,7 +91,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @return
+     * @return boolean
      */
     @Override
     public Boolean exists() {
@@ -103,7 +103,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @return
+     * @return boolean
      */
     @Override
     public Boolean isAdministrator() {
@@ -115,7 +115,7 @@ public class User implements UserInterface {
 
     /**
      *
-     * @return
+     * @return boolean
      */
     @Override
     public Boolean isContestant() {

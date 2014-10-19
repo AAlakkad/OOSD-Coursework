@@ -12,12 +12,10 @@ import java.util.HashMap;
  */
 public class DAO implements DAO_Interface {
 
-    // Quiz questions number to use app-wide
-
     /**
-     *
+     * Quiz questions number to use app-wide
      */
-        public final static Integer quizQuestions = 5;
+    public final static Integer quizQuestions = 5;
     // Singleton object
     private static DAO theQuizDAO;
     private Connection databaseConnection;
@@ -27,7 +25,7 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @return
+     * @return DAO instance
      */
     public static DAO getQuizDAO() {
         if (theQuizDAO == null) {
@@ -64,11 +62,11 @@ public class DAO implements DAO_Interface {
     }
 
     /**
-     * @param username
-     * @param password
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param username Username
+     * @param password Passowrd
+     * @return User object
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public User checkLogin(String username, String password)
@@ -98,9 +96,9 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @return Topics names
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public HashMap<Integer, String> getTopicsNames() throws ClassNotFoundException, SQLException {
@@ -127,9 +125,9 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @return Difficulties names
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public HashMap<Integer, String> getDifficultiesNames() throws ClassNotFoundException, SQLException {
@@ -156,9 +154,9 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @return Topics
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public ArrayList<Topic> getTopics() throws ClassNotFoundException, SQLException {
@@ -192,10 +190,10 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param id
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param id topic id
+     * @return Topic
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public Topic getTopic(Integer id) throws ClassNotFoundException, SQLException {
@@ -239,11 +237,11 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param id
-     * @param name
-     * @param description
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param id topic id
+     * @param name topic name
+     * @param description topic description
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public void updateTopic(Integer id, String name, String description) throws ClassNotFoundException, SQLException {
@@ -253,10 +251,10 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param name
-     * @param description
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param name topic name
+     * @param description topic description
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public void insertTopic(String name, String description) throws ClassNotFoundException, SQLException {
@@ -266,9 +264,9 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param id
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param id topic id
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public void deleteTopic(Integer id) throws ClassNotFoundException, SQLException {
@@ -278,9 +276,9 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @return Questions Array
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public ArrayList<Question> getQuestions() throws ClassNotFoundException, SQLException {
@@ -320,10 +318,10 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param id
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param id question id
+     * @return Question
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public Question getQuestion(Integer id) throws ClassNotFoundException, SQLException {
@@ -349,9 +347,9 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @return random question
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public Question getRandomQuestion() throws ClassNotFoundException, SQLException {
@@ -376,11 +374,11 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param topicId
-     * @param difficultyId
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param topicId topic id
+     * @param difficultyId difficulty id
+     * @return Question
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public Question getRandomQuestion(Integer topicId, Integer difficultyId) throws ClassNotFoundException, SQLException {
@@ -408,16 +406,16 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param title
-     * @param topicId
-     * @param difficultyId
-     * @param correctAnswer
-     * @param answer_1
-     * @param answer_2
-     * @param answer_3
-     * @param answer_4
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param title question title
+     * @param topicId topic id
+     * @param difficultyId difficulty id
+     * @param correctAnswer correct answer
+     * @param answer_1 answer 1
+     * @param answer_2 answer 2
+     * @param answer_3 answer 3
+     * @param answer_4 answer 4
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public void insertQuestion(String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException {
@@ -427,17 +425,17 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param id
-     * @param title
-     * @param topicId
-     * @param difficultyId
-     * @param correctAnswer
-     * @param answer_1
-     * @param answer_2
-     * @param answer_3
-     * @param answer_4
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param id question id
+     * @param title question title
+     * @param topicId topic id
+     * @param difficultyId difficulty id
+     * @param correctAnswer correct answer
+     * @param answer_1 answer 1
+     * @param answer_2 answer 2
+     * @param answer_3 answer 3
+     * @param answer_4 answer 4
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public void updateQuestion(Integer id, String title, Integer topicId, Integer difficultyId, Integer correctAnswer, String answer_1, String answer_2, String answer_3, String answer_4) throws ClassNotFoundException, SQLException {
@@ -455,9 +453,9 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param id
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param id question id
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public void deleteQuestion(Integer id) throws ClassNotFoundException, SQLException {
@@ -467,12 +465,12 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param userId
-     * @param topicId
-     * @param difficulty_id
-     * @param score
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param userId user id
+     * @param topicId topic id
+     * @param difficulty_id difficulty id
+     * @param score score
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     @Override
     public void addScore(Integer userId, Integer topicId, Integer difficulty_id, Double score) throws ClassNotFoundException, SQLException {
@@ -482,11 +480,11 @@ public class DAO implements DAO_Interface {
 
     /**
      *
-     * @param userId
-     * @param topicId
-     * @return
-     * @throws ClassNotFoundException
-     * @throws SQLException
+     * @param userId user id
+     * @param topicId topic id
+     * @return score order for the given user
+     * @throws ClassNotFoundException if class not found
+     * @throws SQLException if SQL error happends
      */
     public Integer getScoreOrder(Integer userId, Integer topicId) throws ClassNotFoundException, SQLException {
         Integer order = 0;

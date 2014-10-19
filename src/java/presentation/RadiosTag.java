@@ -10,18 +10,35 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ *
+ * @author ammar
+ */
 public class RadiosTag extends TagSupport {
 
     private String tabletype;
 
+    /**
+     *
+     * @param tt table type
+     */
     public void setTabletype(String tt) {
         this.tabletype = tt;
     }
 
+    /**
+     *
+     * @return table type
+     */
     public String getTabletype() {
         return this.tabletype;
     }
 
+    /**
+     *
+     * @return SKIP_BODY
+     */
+    @Override
     public int doStartTag() {
         DAO dao = DAO.getQuizDAO();
 
@@ -51,6 +68,11 @@ public class RadiosTag extends TagSupport {
         return SKIP_BODY;
     }
 
+    /**
+     *
+     * @return EVAL_PAGE
+     */
+    @Override
     public int doEndTag() {
         return EVAL_PAGE;
     }

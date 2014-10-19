@@ -8,109 +8,109 @@ public interface QuestionInterface {
 
     /**
      *
-     * @return
+     * @return id
      */
     Integer getId();
 
     /**
      *
-     * @param id
+     * @param id id
      */
     void setId(Integer id);
 
     /**
      *
-     * @return
+     * @return topic id
      */
     Integer getTopicId();
 
     /**
      *
-     * @param topicId
+     * @param topicId topic id
      */
     void setTopicId(Integer topicId);
 
     /**
      *
-     * @return
+     * @return difficulty id
      */
     Integer getDifficultyId();
 
     /**
      *
-     * @param difficultyId
+     * @param difficultyId difficulty id
      */
     void setDifficultyId(Integer difficultyId);
 
     /**
      *
-     * @return
+     * @return title
      */
     String getTitle();
 
     /**
      *
-     * @param title
+     * @param title title
      */
     void setTitle(String title);
 
     /**
      *
-     * @return
+     * @return correct answer
      */
     Integer getCorrectAnswer();
 
     /**
      *
-     * @param correctAnswer
+     * @param correctAnswer correct answer
      */
     void setCorrectAnswer(Integer correctAnswer);
 
     /**
      *
-     * @return
+     * @return answer 1
      */
     String getAnswer_1();
 
     /**
      *
-     * @param answer
+     * @param answer answer
      */
     void setAnswer_1(String answer);
 
     /**
      *
-     * @return
+     * @return answer 2
      */
     String getAnswer_2();
 
     /**
      *
-     * @param answer
+     * @param answer answer
      */
     void setAnswer_2(String answer);
 
     /**
      *
-     * @return
+     * @return answer 3
      */
     String getAnswer_3();
 
     /**
      *
-     * @param answer
+     * @param answer answer
      */
     void setAnswer_3(String answer);
 
     /**
      *
-     * @return
+     * @return answer 4
      */
     String getAnswer_4();
 
     /**
      *
-     * @param answer
+     * @param answer answer
      */
     void setAnswer_4(String answer);
 }

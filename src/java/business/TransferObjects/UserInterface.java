@@ -8,64 +8,63 @@ public interface UserInterface {
 
     /**
      *
-     * @return
+     * @return id
      */
     Integer getId();
 
     /**
      *
-     * @param id
+     * @param id id
      */
     void setId(Integer id);
 
     /**
      *
-     * @return
+     * @return username
      */
     String getUsername();
 
     /**
      *
-     * @param username
+     * @param username username
      */
     void setUsername(String username);
 
     /**
      *
-     * @return
+     * @return type
      */
     String getType();
 
     /**
      *
-     * @param type
+     * @param type type
      */
     void setType(String type);
 
     // Check if UserInterface instance has username/type fields filled
-
     /**
      *
-     * @return
+     * @return boolean
      */
-        Boolean exists();
+    Boolean exists();
 
     /**
      *
-     * @return
+     * @return boolean
      */
     Boolean isAdministrator();
 
     /**
      *
-     * @return
+     * @return boolean
      */
     Boolean isContestant();
 
     /**
      *
-     * @param topicId
-     * @return
+     * @param topicId topic id
+     * @return score
      */
     int getScore(int topicId);
 }

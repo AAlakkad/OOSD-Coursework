@@ -17,8 +17,8 @@ public class Authentication {
 
     /**
      *
-     * @param request
-     * @return
+     * @param request request
+     * @return boolean
      */
     public static boolean isLoggedIn(HttpServletRequest request) {
         UserInterface user = getUserFromRequest(request);
@@ -32,8 +32,8 @@ public class Authentication {
 
     /**
      *
-     * @param request
-     * @return
+     * @param request request
+     * @return boolean
      */
     public static boolean isAdministrator(HttpServletRequest request) {
         UserInterface user = getUserFromRequest(request);
@@ -54,13 +54,13 @@ public class Authentication {
 
     /**
      *
-     * @param request
-     * @param response
+     * @param request request
+     * @param response response
      */
     public static void redirectLogIn(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.getSession().setAttribute("error", "You must log in to view that page.");
-            response.sendRedirect("Relay?action=/login.jsp");
+            response.sendRedirect("/Relay?action=/login.jsp");
         } catch (IOException ex) {
             Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,22 +68,22 @@ public class Authentication {
 
     /**
      *
-     * @param request
-     * @param response
+     * @param request request
+     * @param response response
      */
     public static void mustBeLoggedIn(HttpServletRequest request, HttpServletResponse response) {
-        if(! isLoggedIn(request)) {
+        if (!isLoggedIn(request)) {
             redirectLogIn(request, response);
         }
     }
 
     /**
      *
-     * @param request
-     * @param response
+     * @param request request
+     * @param response response
      */
     public static void mustBeAdministrator(HttpServletRequest request, HttpServletResponse response) {
-        if(! isAdministrator(request)) {
+        if (!isAdministrator(request)) {
             redirectLogIn(request, response);
         }
     }

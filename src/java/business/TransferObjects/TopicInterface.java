@@ -8,37 +8,37 @@ public interface TopicInterface {
 
     /**
      *
-     * @return
+     * @return id
      */
     Integer getId();
 
     /**
      *
-     * @param id
+     * @param id id
      */
     void setId(Integer id);
 
     /**
      *
-     * @return
+     * @return name
      */
     String getName();
 
     /**
      *
-     * @param name
+     * @param name name
      */
     void setName(String name);
 
     /**
      *
-     * @return
+     * @return description
      */
     String getDescription();
 
     /**
      *
-     * @param description
+     * @param description description
      */
     void setDescription(String description);
 }

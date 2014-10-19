@@ -207,7 +207,7 @@ public class Quiz extends HttpServlet {
         if (quizCounter < DAO.quizQuestions) {
             // get random question
             QuestionInterface randomQuestion = dao.getRandomQuestion(quizTopicId, quizDifficultyId);
-            if(randomQuestion == null) {
+            if (randomQuestion == null) {
                 Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, "randomQuestion is null");
                 // empty session
                 this.emptySession(request);
@@ -285,9 +285,9 @@ public class Quiz extends HttpServlet {
 
     /**
      *
-     * @param request
-     * @param response
-     * @return
+     * @param request Request
+     * @param response Response
+     * @return comparsion result
      */
     static public String compareResult(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();

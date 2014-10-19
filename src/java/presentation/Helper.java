@@ -11,7 +11,7 @@ public class Helper {
     /**
      * Get string representation of a number, e.g. 1st, 2nd, 3rd, 4th, etc.
      *
-     * @param contestantScore
+     * @param contestantScore Contestant score
      * @return String
      *
      * Original source for this method: http://www.javalobby.org/forums/thread.jspa?threadID=16906&tstart=0 I've updated it a little to be more useful
@@ -37,10 +37,10 @@ public class Helper {
     /**
      * Get random number between (min, max) where result != notEqual parameter
      *
-     * @param min
-     * @param max
-     * @param notEqual
-     * @return
+     * @param min minimum value
+     * @param max maximum value
+     * @param notEqual value must not equal this param
+     * @return random number
      */
     public static Integer getRandomNumber(Integer min, Integer max, Integer notEqual) {
         Integer random = getRandomNumberBetween(min, max);
@@ -53,11 +53,11 @@ public class Helper {
     /**
      * Get random number between (min, max) where result != notEqual1 and != notEqual2 parameters
      *
-     * @param min
-     * @param max
-     * @param notEqual1
-     * @param notEqual2
-     * @return
+     * @param min minimum value
+     * @param max maximum value
+     * @param notEqual1 value must not equal this param
+     * @param notEqual2 value must not equal this param
+     * @return random number
      */
     public static Integer getRandomNumber(Integer min, Integer max, Integer notEqual1, Integer notEqual2) {
         Integer random = getRandomNumberBetween(min, max);

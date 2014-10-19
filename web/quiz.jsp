@@ -19,8 +19,6 @@
     Boolean answersDiscarded = false;
     if (session.getAttribute("answersDiscarded") != null) {
         answersDiscarded = Boolean.parseBoolean(session.getAttribute("answersDiscarded").toString());
-        System.out.println(session.getAttribute("answersDiscarded").toString());
-        System.out.println(answersDiscarded.toString());
     }
 %>
 

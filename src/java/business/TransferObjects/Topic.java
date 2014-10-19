@@ -18,9 +18,9 @@ public final class Topic implements TopicInterface {
 
     /**
      *
-     * @param id
-     * @param name
-     * @param description
+     * @param id id
+     * @param name name
+     * @param description description
      */
     public Topic(Integer id, String name, String description) {
         this.setId(id);
@@ -30,7 +30,7 @@ public final class Topic implements TopicInterface {
 
     /**
      *
-     * @return
+     * @return id
      */
     @Override
     public Integer getId() {
@@ -39,7 +39,7 @@ public final class Topic implements TopicInterface {
 
     /**
      *
-     * @param id
+     * @param id id
      */
     @Override
     public void setId(Integer id) {
@@ -48,7 +48,7 @@ public final class Topic implements TopicInterface {
 
     /**
      *
-     * @return
+     * @return name
      */
     @Override
     public String getName() {
@@ -57,7 +57,7 @@ public final class Topic implements TopicInterface {
 
     /**
      *
-     * @param name
+     * @param name name
      */
     @Override
     public void setName(String name) {
@@ -66,7 +66,7 @@ public final class Topic implements TopicInterface {
 
     /**
      *
-     * @return
+     * @return description
      */
     @Override
     public String getDescription() {
@@ -75,7 +75,7 @@ public final class Topic implements TopicInterface {
 
     /**
      *
-     * @param description
+     * @param description description
      */
     @Override
     public void setDescription(String description) {

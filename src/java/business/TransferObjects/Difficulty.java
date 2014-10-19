@@ -1,4 +1,3 @@
-
 package business.TransferObjects;
 
 /**
@@ -12,7 +11,7 @@ public class Difficulty implements DifficultyInterface {
 
     /**
      *
-     * @return
+     * @return id
      */
     @Override
     public Integer getId() {
@@ -21,7 +20,7 @@ public class Difficulty implements DifficultyInterface {
 
     /**
      *
-     * @param id
+     * @param id id
      */
     @Override
     public void setId(Integer id) {
@@ -30,7 +29,7 @@ public class Difficulty implements DifficultyInterface {
 
     /**
      *
-     * @return
+     * @return name
      */
     @Override
     public String getName() {
@@ -39,7 +38,7 @@ public class Difficulty implements DifficultyInterface {
 
     /**
      *
-     * @param name
+     * @param name name
      */
     @Override
     public void setName(String name) {
