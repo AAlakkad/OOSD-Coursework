@@ -21,7 +21,7 @@
 
 <%@include file="../../partials/header.jsp" %>
 
-<h1><a href="./index.jsp">Topics</a>
+<h1><a href="/Relay?action=/admin/topics/index.jsp">Topics</a>
     <small>&raquo; <%= subAction%>
     </small>
 </h1>

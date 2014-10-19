@@ -36,7 +36,7 @@
 
 <%@include file="../../partials/header.jsp" %>
 
-<h1><a href="./index.jsp">Questions</a>
+<h1><a href="/Relay?action=/admin/questions/index.jsp">Questions</a>
     <small>&raquo; <%= subAction%>
     </small>
 </h1>
