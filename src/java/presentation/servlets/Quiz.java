@@ -48,7 +48,7 @@ public class Quiz extends HttpServlet {
                     this.discardAnswers(request, response);
                     break;
                 case "compare":
-                    this.compareResult(request, response);
+                    Quiz.compareResult(request, response);
                     break;
             }
         } else {
@@ -69,23 +69,32 @@ public class Quiz extends HttpServlet {
      * @param response
      */
     private void saveTopic(HttpServletRequest request, HttpServletResponse response) {
-        // Save topic to session
-        try {
-            // Empty session to prevent old session collision
-            this.emptySession(request);
+        if (request.getParameter("topic_id") == null) {
+            // get back to topic page
+            try {
+                response.sendRedirect("/Relay?action=/topic.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            // Save topic to session
+            try {
+                // Empty session to prevent old session collision
+                this.emptySession(request);
 
-            Integer topicId = Integer.parseInt(request.getParameter("topic_id"));
-            HttpSession session = request.getSession(true);
-            session.setAttribute("quizTopicId", topicId);
-        } catch (Exception ex) {
-            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                Integer topicId = Integer.parseInt(request.getParameter("topic_id"));
+                HttpSession session = request.getSession(true);
+                session.setAttribute("quizTopicId", topicId);
+            } catch (Exception ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        try {
-            // redirect to difficulty page
-            response.sendRedirect("/Relay?action=/difficulty.jsp");
-        } catch (IOException ex) {
-            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                // redirect to difficulty page
+                response.sendRedirect("/Relay?action=/difficulty.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -96,52 +105,76 @@ public class Quiz extends HttpServlet {
      * @param response
      */
     private void saveDifficulty(HttpServletRequest request, HttpServletResponse response) {
-        // Save topic to session
-        try {
-            // Empty session to prevent old session collision
+        if (request.getParameter("difficulty_id") == null) {
+            try {
+                // get back to difficulty page
+                response.sendRedirect("/Relay?action=/difficulty.jsp");
+            } catch (IOException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            // Save topic to session
+            try {
+                // Empty session to prevent old session collision
 
-            Integer difficultyId = Integer.parseInt(request.getParameter("difficulty_id"));
-            HttpSession session = request.getSession(true);
-            session.setAttribute("quizDifficultyId", difficultyId);
-        } catch (Exception ex) {
-            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                Integer difficultyId = Integer.parseInt(request.getParameter("difficulty_id"));
+                HttpSession session = request.getSession(true);
+                session.setAttribute("quizDifficultyId", difficultyId);
+            } catch (Exception ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-        // Process answering questions
-        try {
-            this.processQuestions(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            // Process answering questions
+            try {
+                this.processQuestions(request, response);
+            } catch (Exception ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     private void processAnswer(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        // get the random question from session
-        QuestionInterface question = (QuestionInterface) session.getAttribute("quizQuestion");
-        // get answer number parameter
-        Integer contestantAnswer = request.getParameter("answer") != null ? Integer.parseInt(request.getParameter("answer")) : 0;
-        if (contestantAnswer == question.getCorrectAnswer()) {
-            Double quizScore = session.getAttribute("quizScore") != null ? Double.parseDouble(session.getAttribute("quizScore").toString()) : 0;
-            // increase 1 to the result in session
-            Boolean answersDiscarded = session.getAttribute("answersDiscarded") != null ? Boolean.parseBoolean(session.getAttribute("answersDiscarded").toString()) : false;
-            if (answersDiscarded) {
-                quizScore += 0.5;
-            } else {
-                quizScore++;
+        // check submitted answer
+        if (request.getParameter("answer") == null) {
+            // keep the contestant on the same page and display error message
+            String msg = "You must select answer to continue";
+            session.setAttribute("error", msg);
+            RequestDispatcher rd = request.getRequestDispatcher("quiz.jsp");
+            try {
+                rd.forward(request, response);
+            } catch (ServletException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
             }
-            // Save updated score in the session
-            session.setAttribute("quizScore", quizScore);
-        }
-        // Remove indicator for answersDiscared, so discarding button could appear in the next question
-        session.removeAttribute("answersDiscarded");
-        // forward to answer next question (call this.processQuestions)
-        try {
-            this.processQuestions(request, response);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            // get answer number parameter
+            Integer contestantAnswer = request.getParameter("answer") != null ? Integer.parseInt(request.getParameter("answer")) : 0;
+            // get the random question from session
+            QuestionInterface question = (QuestionInterface) session.getAttribute("quizQuestion");
+            if (contestantAnswer == question.getCorrectAnswer()) {
+                Double quizScore = session.getAttribute("quizScore") != null ? Double.parseDouble(session.getAttribute("quizScore").toString()) : 0;
+                // increase 1 to the result in session
+                Boolean answersDiscarded = session.getAttribute("answersDiscarded") != null ? Boolean.parseBoolean(session.getAttribute("answersDiscarded").toString()) : false;
+                if (answersDiscarded) {
+                    quizScore += 0.5;
+                } else {
+                    quizScore++;
+                }
+                // Save updated score in the session
+                session.setAttribute("quizScore", quizScore);
+            }
+            // Remove indicator for answersDiscared, so discarding button could appear in the next question
+            session.removeAttribute("answersDiscarded");
+            // forward to answer next question (call this.processQuestions)
+            try {
+                this.processQuestions(request, response);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -170,6 +203,22 @@ public class Quiz extends HttpServlet {
         if (quizCounter < DAO.quizQuestions) {
             // get random question
             QuestionInterface randomQuestion = dao.getRandomQuestion(quizTopicId, quizDifficultyId);
+            if(randomQuestion == null) {
+                Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, "randomQuestion is null");
+                // empty session
+                this.emptySession(request);
+                // redirect to home, with error message
+                String msg = "Couldn't get random question!";
+                session.setAttribute("error", msg);
+                RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+                try {
+                    rd.forward(request, response);
+                } catch (ServletException ex) {
+                    Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
             // save random question to session questionsList
             session.setAttribute("quizQuestion", randomQuestion);

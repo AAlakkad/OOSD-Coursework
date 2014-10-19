@@ -34,6 +34,13 @@
     <h1 class="question-title"><%= title%>
     </h1>
 
+    <% if (session.getAttribute("error") != null) {%>
+    <div class="alert alert-danger">
+        <%= session.getAttribute("error").toString()%>
+    </div>
+    <% session.removeAttribute("error");
+        }%>
+
     <form method="post" action="/Relay">
         <input type="hidden" name="action" value="Quiz">
         <input type="hidden" name="sub_action" value="submit_answer">
@@ -70,18 +77,24 @@
             </label>
         </div>
         <% }%>
-
-        <input type="submit" value="Submit" class="btn btn-default">
+        <div class="col-md-6">
+            <input type="submit" value="Submit" class="btn btn-default">
+        </div>
     </form>
     <% if (!answersDiscarded) {%>
+
     <form method="post" action="/Relay">
         <input type="hidden" name="action" value="Quiz">
         <input type="hidden" name="sub_action" value="discard_answers">
         <input type="hidden" name="question_id" value="<%= questionId%>">
+        <div class="col-md-6">
+            <input type="submit" value="Discard 2 answers" class="btn btn-warning pull-right">
+        </div>
 
-        <input type="submit" value="Discard 2 answers" class="btn btn-default pull-right">
-        <div class="alert alert-warning" role="alert">Using the <strong>discard 2 answers option</strong> will result in having half a point of the question.</div>
     </form>
+    <br><br>
+    <div class="clearfix"></div>
+    <div class="alert alert-warning" role="alert">Using the <strong>discard 2 answers option</strong> will result in having half a point of the question.</div>
     <% }%>
 </div>
 <%@include file="partials/footer.jsp" %>

@@ -306,6 +306,8 @@ public class DAO implements DAO_Interface {
             ResultSet result = myStatement.executeQuery(query1);
             if (result.next()) {
                 question = populateQuestionObject(result);
+            } else {
+                return null;
             }
 
             closeConnection();
