@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="U`F-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="Coursework" default="all" basedir=".">
     <target name="init_jboss">
         <property name="server_root" value="D:/jboss-4.0.4.GA/"/>
