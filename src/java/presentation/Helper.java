@@ -49,15 +49,15 @@ public class Helper {
         }
         return random;
     }
-    
+
     /**
      * Get random number between (min, max) where result != notEqual1 and != notEqual2 parameters
-     * 
+     *
      * @param min
      * @param max
      * @param notEqual1
      * @param notEqual2
-     * @return 
+     * @return
      */
     public static Integer getRandomNumber(Integer min, Integer max, Integer notEqual1, Integer notEqual2) {
         Integer random = getRandomNumberBetween(min, max);

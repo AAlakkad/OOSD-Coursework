@@ -20,6 +20,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import presentation.Helper;
 
+/**
+ *
+ * @author ammar
+ */
 public class Quiz extends HttpServlet {
 
     /**
@@ -279,6 +283,12 @@ public class Quiz extends HttpServlet {
         dao.addScore(user.getId(), quizTopicId, difficultyId, score);
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     */
     static public String compareResult(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String message = "We couldn't find your score for the selected topic, may be you didn't take a quiz in this topic yet?";

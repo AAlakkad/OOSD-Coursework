@@ -9,13 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
  *
  * @author ammar
  */
 public class Authentication {
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     public static boolean isLoggedIn(HttpServletRequest request) {
         UserInterface user = getUserFromRequest(request);
         if (user != null) {
@@ -26,6 +30,11 @@ public class Authentication {
         return false;
     }
 
+    /**
+     *
+     * @param request
+     * @return
+     */
     public static boolean isAdministrator(HttpServletRequest request) {
         UserInterface user = getUserFromRequest(request);
         if (user != null) {
@@ -43,6 +52,11 @@ public class Authentication {
         return user;
     }
 
+    /**
+     *
+     * @param request
+     * @param response
+     */
     public static void redirectLogIn(HttpServletRequest request, HttpServletResponse response) {
         try {
             request.getSession().setAttribute("error", "You must log in to view that page.");
@@ -51,13 +65,23 @@ public class Authentication {
             Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    /**
+     *
+     * @param request
+     * @param response
+     */
     public static void mustBeLoggedIn(HttpServletRequest request, HttpServletResponse response) {
         if(! isLoggedIn(request)) {
             redirectLogIn(request, response);
         }
     }
-    
+
+    /**
+     *
+     * @param request
+     * @param response
+     */
     public static void mustBeAdministrator(HttpServletRequest request, HttpServletResponse response) {
         if(! isAdministrator(request)) {
             redirectLogIn(request, response);
