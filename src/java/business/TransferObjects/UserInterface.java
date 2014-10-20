@@ -61,10 +61,4 @@ public interface UserInterface {
      */
     Boolean isContestant();
 
-    /**
-     *
-     * @param topicId topic id
-     * @return score
-     */
-    int getScore(int topicId);
 }

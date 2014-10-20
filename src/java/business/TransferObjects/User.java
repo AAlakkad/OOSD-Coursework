@@ -81,16 +81,6 @@ public class User implements UserInterface {
 
     /**
      *
-     * @param topicId topic id
-     * @return score
-     */
-    @Override
-    public int getScore(int topicId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     *
      * @return boolean
      */
     @Override
