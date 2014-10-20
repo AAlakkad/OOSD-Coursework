@@ -11,6 +11,13 @@ import java.util.HashMap;
  * @author ammar
  */
 public class DAO implements DAO_Interface {
+    /**
+     * MySQL connection setting
+     */
+    private String mysqlHost = "localhost";
+    private String mysqlDatabase = "coursework_db";
+    private String mysqlUsername = "root";
+    private String mysqlPassword = "root";
 
     /**
      * Quiz questions number to use app-wide
@@ -40,8 +47,8 @@ public class DAO implements DAO_Interface {
             Class.forName("com.mysql.jdbc.Driver");
             // setup the connection with the DB.
             databaseConnection = DriverManager
-                    .getConnection("jdbc:mysql://localhost/coursework_db?"
-                            + "user=root&password=root");
+                    .getConnection("jdbc:mysql://" + this.mysqlHost + "/" + this.mysqlDatabase + "?"
+                            + "user=" + this.mysqlUsername + "&password=" + this.mysqlPassword );
             return databaseConnection.createStatement();
         } catch (ClassNotFoundException cnfe) {
             System.out.println(cnfe);
