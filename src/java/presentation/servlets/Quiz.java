@@ -201,7 +201,7 @@ public class Quiz extends HttpServlet {
         }
 
         // get questions list
-        ArrayList<Integer> questions = session.getAttribute("questionsList") != null ? (ArrayList<Integer>) session.getAttribute("questionsList") : new ArrayList<>();
+        ArrayList<Integer> questions = session.getAttribute("questionsList") != null ? (ArrayList<Integer>) session.getAttribute("questionsList") : new ArrayList<Integer>();
 
         // if counter is in range
         if (quizCounter < DAO.quizQuestions) {
