@@ -4,7 +4,7 @@
 <%  Authentication.mustBeLoggedIn(request, response);%>
 <%
     if (session.getAttribute("quizQuestion") == null) {
-        response.sendRedirect("/topic.jsp");
+        response.sendRedirect("topic.jsp");
         return;
     }
     QuestionInterface question = (QuestionInterface) session.getAttribute("quizQuestion");
@@ -39,7 +39,7 @@
     <% session.removeAttribute("error");
         }%>
 
-    <form method="post" action="/Relay">
+    <form method="post" action="Relay">
         <input type="hidden" name="action" value="Quiz">
         <input type="hidden" name="sub_action" value="submit_answer">
         <input type="hidden" name="question_id" value="<%= questionId%>">
@@ -81,7 +81,7 @@
     </form>
     <% if (!answersDiscarded) {%>
 
-    <form method="post" action="/Relay">
+    <form method="post" action="Relay">
         <input type="hidden" name="action" value="Quiz">
         <input type="hidden" name="sub_action" value="discard_answers">
         <input type="hidden" name="question_id" value="<%= questionId%>">

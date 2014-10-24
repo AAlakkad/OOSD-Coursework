@@ -1,4 +1,5 @@
+<% String path = request.getContextPath().toString(); %>
 </div>
-<script src="/assets/scripts.js"></script>
+<script src="<%= path%>/assets/scripts.js"></script>
 </body>
 </html>

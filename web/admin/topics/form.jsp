@@ -1,7 +1,7 @@
 <%@page import="integration.Authentication"%>
 <%@page import="business.TransferObjects.Topic" %>
 <%@page import="business.TransferObjects.TopicInterface" %>
-<%@ page import="integration.DAO" %>
+<%@page import="integration.DAO" %>
 
 <%  Authentication.mustBeAdministrator(request, response);%>
 
@@ -21,13 +21,13 @@
 
 <%@include file="../../partials/header.jsp" %>
 
-<h1><a href="/Relay?action=/admin/topics/index.jsp">Topics</a>
+<h1><a href="<%=path%>/Relay?action=/admin/topics/index.jsp">Topics</a>
     <small>&raquo; <%= subAction%>
     </small>
 </h1>
 
 <div class="col-md-8 col-md-offset-2">
-    <form action="/Relay" method="post">
+    <form action="<%=path%>/Relay" method="post">
         <input type="hidden" name="action" value="Topics"/>
         <input type="hidden" name="sub-action" value="<%= subAction%>"/>
         <input type="hidden" name="id" value="<%= id%>">
@@ -45,7 +45,7 @@
         <input type="submit" value="Save" class="btn btn-primary pull-left"/>
     </form>
     <% if (id != null) {%>
-    <form action="/Relay" method="post">
+    <form action="<%=path%>/Relay" method="post">
         <input type="hidden" name="action" value="Topics"/>
         <input type="hidden" name="sub-action" value="delete"/>
         <input type="hidden" name="id" value="<%= id%>">

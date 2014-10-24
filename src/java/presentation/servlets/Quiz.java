@@ -76,7 +76,7 @@ public class Quiz extends HttpServlet {
         if (request.getParameter("topic_id") == null) {
             // get back to topic page
             try {
-                response.sendRedirect("/Relay?action=/topic.jsp");
+                response.sendRedirect("Relay?action=/topic.jsp");
             } catch (IOException ex) {
                 Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -95,7 +95,7 @@ public class Quiz extends HttpServlet {
 
             try {
                 // redirect to difficulty page
-                response.sendRedirect("/Relay?action=/difficulty.jsp");
+                response.sendRedirect("Relay?action=/difficulty.jsp");
             } catch (IOException ex) {
                 Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -112,7 +112,7 @@ public class Quiz extends HttpServlet {
         if (request.getParameter("difficulty_id") == null) {
             try {
                 // get back to difficulty page
-                response.sendRedirect("/Relay?action=/difficulty.jsp");
+                response.sendRedirect("Relay?action=/difficulty.jsp");
             } catch (IOException ex) {
                 Logger.getLogger(Quiz.class.getName()).log(Level.SEVERE, null, ex);
             }

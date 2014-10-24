@@ -58,9 +58,10 @@ public class Authentication {
      * @param response response
      */
     public static void redirectLogIn(HttpServletRequest request, HttpServletResponse response) {
+        String path = request.getContextPath().toString();
         try {
             request.getSession().setAttribute("error", "You must log in to view that page.");
-            response.sendRedirect("/Relay?action=/login.jsp");
+            response.sendRedirect(path + "/Relay?action=/login.jsp");
         } catch (IOException ex) {
             Logger.getLogger(Authentication.class.getName()).log(Level.SEVERE, null, ex);
         }

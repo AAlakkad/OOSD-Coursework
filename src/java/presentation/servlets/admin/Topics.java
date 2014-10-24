@@ -29,6 +29,8 @@ public class Topics extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
         String subAction = request.getParameter("sub-action");
+        String path = request.getContextPath().toString();
+
         switch (subAction) {
             case "new":
                 this.processNew(request);
@@ -40,7 +42,7 @@ public class Topics extends HttpServlet {
                 this.processDelete(request);
                 break;
         }
-        response.sendRedirect("/Relay?action=/admin/topics/index.jsp");
+        response.sendRedirect(path + "/Relay?action=/admin/topics/index.jsp");
 
     }
 

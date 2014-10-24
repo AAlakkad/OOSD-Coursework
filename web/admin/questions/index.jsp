@@ -8,7 +8,7 @@
 
 <%@include file="../../partials/header.jsp" %>
 
-<h1>Questions <a href="/Relay?action=/admin/questions/form.jsp" class="btn btn-sm btn-default">New Question</a></h1>
+<h1>Questions <a href="<%=path%>/Relay?action=/admin/questions/form.jsp" class="btn btn-sm btn-default">New Question</a></h1>
 
 <table class="table table-bordered table-hover">
     <thead>
@@ -33,7 +33,7 @@
             <td><%=aQuestion.getTitle()%>
             </td>
             <td>
-                <a href="/Relay?action=/admin/questions/form.jsp&id=<%=aQuestion.getId()%>" class="btn btn-success">Edit</a>
+                <a href="<%=path%>/Relay?action=/admin/questions/form.jsp&id=<%=aQuestion.getId()%>" class="btn btn-success">Edit</a>
             </td>
         </tr>
         <%

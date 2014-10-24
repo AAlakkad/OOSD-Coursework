@@ -15,7 +15,7 @@
         }
     %>
 
-    <form action="/Relay" method="post">
+    <form action="Relay" method="post">
         <input type="hidden" name="action" value="Login"/>
 
         <div class="form-group">

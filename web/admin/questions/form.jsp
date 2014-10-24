@@ -36,13 +36,13 @@
 
 <%@include file="../../partials/header.jsp" %>
 
-<h1><a href="/Relay?action=/admin/questions/index.jsp">Questions</a>
+<h1><a href="<%=path%>/Relay?action=/admin/questions/index.jsp">Questions</a>
     <small>&raquo; <%= subAction%>
     </small>
 </h1>
 
 <div class="col-md-8 col-md-offset-2">
-    <form action="/Relay" method="post" class="form-horizontal">
+    <form action="<%=path%>/Relay" method="post" class="form-horizontal">
         <input type="hidden" name="action" value="Questions"/>
         <input type="hidden" name="sub-action" value="<%= subAction%>"/>
         <input type="hidden" name="id" value="<%= id%>">
@@ -154,7 +154,7 @@
         </div>
     </form>
     <% if (id != null) {%>
-    <form action="/Relay" method="post">
+    <form action="<%=path%>/Relay" method="post">
         <input type="hidden" name="action" value="Questions"/>
         <input type="hidden" name="sub-action" value="delete"/>
         <input type="hidden" name="id" value="<%= id%>">
