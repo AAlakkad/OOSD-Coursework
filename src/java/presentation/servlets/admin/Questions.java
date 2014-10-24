@@ -33,6 +33,9 @@ public class Questions extends HttpServlet {
         if (!Authentication.isAdministrator(request)) {
             Authentication.redirectLogIn(request, response);
         }
+
+        String path = request.getContextPath().toString();
+
         String subAction = request.getParameter("sub-action");
         switch (subAction) {
             case "new":
@@ -45,7 +48,7 @@ public class Questions extends HttpServlet {
                 this.processDelete(request);
                 break;
         }
-        response.sendRedirect("/Relay?action=/admin/questions/index.jsp");
+        response.sendRedirect(path + "/Relay?action=/admin/questions/index.jsp");
         return;
     }
 

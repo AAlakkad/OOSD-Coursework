@@ -12,12 +12,12 @@
 <div class="col-md-8 col-md-offset-2">
     <h1>Choose topic to start:</h1>
 
-    <form method="post" action="/Relay">
+    <form method="post" action="Relay">
         <input type="hidden" name="action" value="Quiz">
         <input type="hidden" name="sub_action" value="choose_difficulty">
 
         <quiz:itemsRadio tabletype="difficulties"/>
-        
+
         <input type="submit" value="Start!" class="btn btn-success">
     </form>
 </div>

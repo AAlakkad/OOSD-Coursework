@@ -20,10 +20,10 @@ if(request.getParameter("sub_action") != null) {
 <div class="col-md-8 col-md-offset-2">
     <h1>Choose topic to compare</h1>
 
-    <form method="post" action="/Relay">
+    <form method="post" action="Relay">
         <input type="hidden" name="action" value="compare.jsp">
         <input type="hidden" name="sub_action" value="compare">
-        
+
         <%
             if(message != null) {
                 %>
@@ -35,7 +35,7 @@ if(request.getParameter("sub_action") != null) {
         %>
 
         <quiz:itemsRadio tabletype="topics"/>
-        
+
         <input type="submit" value="Compare!" class="btn btn-success">
     </form>
 </div>

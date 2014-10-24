@@ -1,4 +1,5 @@
 <%@page import="business.TransferObjects.UserInterface" %>
+<% String path = request.getContextPath().toString(); %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,8 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="author" content="Ammar Alakkad">
-        <link rel="stylesheet" href="/assets/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/assets/custom.css"/>
+        <link rel="stylesheet" href="<%= path%>/assets/bootstrap.min.css"/>
+        <link rel="stylesheet" href="<%= path%>/assets/custom.css"/>
         <title>Quiz Application</title>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -17,7 +18,6 @@
         <![endif]-->
     </head>
     <body>
-
 
         <div class="navbar navbar-default" role="navigation">
             <div class="container">
@@ -28,7 +28,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Quiz Application</a>
+                    <a class="navbar-brand" href="<%=path%>">Quiz Application</a>
                 </div>
                 <% UserInterface user = (UserInterface) session.getAttribute("user"); %>
                 <%
@@ -40,14 +40,14 @@
                             if (user.isAdministrator()) {
                                 // Load administrator menu
                         %>
-                        <li><a href="/Relay?action=admin/topics/index.jsp">Topics</a></li>
-                        <li><a href="/Relay?action=admin/questions/index.jsp">Questions</a></li>
+                        <li><a href="<%=path%>/Relay?action=admin/topics/index.jsp">Topics</a></li>
+                        <li><a href="<%=path%>/Relay?action=admin/questions/index.jsp">Questions</a></li>
                             <%
                             } else {
                                 // Load contestant menu
                             %>
-                        <li><a href="/Relay?action=topic.jsp">Start quiz</a></li>
-                        <li><a href="/Relay?action=compare.jsp">Compare your result</a></li>
+                        <li><a href="<%=path%>/Relay?action=topic.jsp">Start quiz</a></li>
+                        <li><a href="<%=path%>/Relay?action=compare.jsp">Compare your result</a></li>
                             <%
                                 }
                             %>
