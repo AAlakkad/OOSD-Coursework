@@ -1,29 +1,26 @@
-
-
 <project name="Coursework" default="compile" basedir=".">
     <property file="build.properties"/>
     <property file="${user.home}/build.properties"/>
-    <property name="app.name"      value="Coursework-aa2807d"/>
-    <property name="app.path"      value="/${app.name}"/>
-    <property name="app.version"   value="0.1-dev"/>
-    <property name="build.home"    value="${basedir}/build"/>
-    <property name="catalina.home" value="/home/ammar/Apps/apache-tomcat-8.0.9"/>
-    <!-- UPDATE THIS! -->
-    <property name="dist.home"     value="${basedir}/dist"/>
-    <property name="docs.home"     value="${basedir}/docs"/>
-    <property name="manager.url"   value="http://localhost:8080/manager/text"/>
+    <!-- Update starts here -->
+    <!-- to point to the tomcat base directory -->
+    <property name="catalina.home"      value="/home/ammar/Apps/apache-tomcat-8.0.9"/>
+    <property name="manager.url"        value="http://localhost:8080/manager/text"/>
     <property name="manager.username"   value="admin"/>
     <property name="manager.password"   value="admin"/>
-    <property name="src.home"      value="${basedir}/src"/>
-    <property name="web.home"      value="${basedir}/web"/>
+    <!-- Update ends here -->
+    <property name="app.name"           value="Coursework-aa2807d"/>
+    <property name="app.path"           value="/${app.name}"/>
+    <property name="app.version"        value="0.1-dev"/>
+    <property name="build.home"         value="${basedir}/build"/>
+    <property name="dist.home"          value="${basedir}/dist"/>
+    <property name="docs.home"          value="${basedir}/docs"/>
+    <property name="src.home"           value="${basedir}/src"/>
+    <property name="web.home"           value="${basedir}/web"/>
     <!-- ==================== External Dependencies =========================== -->
-    <property name="mysql-connector" value="lib/mysql-connector-java-5.1.2.jar"/>
+    <property name="mysql-connector"    value="lib/mysql-connector-java-5.1.2.jar"/>
     <!-- ==================== Compilation Classpath =========================== -->
     <path id="compile.classpath">
-        <!-- Include all JAR files that will be included in /WEB-INF/lib -->
-        <!-- *** CUSTOMIZE HERE AS REQUIRED BY YOUR APPLICATION *** -->
         <pathelement location="${mysql-connector}"/>
-        <!-- Include all elements that Tomcat exposes to applications -->
         <fileset dir="${catalina.home}/bin">
             <include name="*.jar"/>
         </fileset>
@@ -33,106 +30,66 @@
         </fileset>
     </path>
     <!-- ================== Custom Ant Task Definitions ======================= -->
-    <taskdef resource="org/apache/catalina/ant/catalina.tasks"
-           classpathref="compile.classpath"/>
+    <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="compile.classpath"/>
     <!--  ==================== Compilation Control Options ==================== -->
     <property name="compile.debug"       value="true"/>
     <property name="compile.deprecation" value="false"/>
     <!-- ==================== All Target ====================================== -->
-    <target name="all" depends="clean,compile"
-   description="Clean build and dist directories, then compile"/>
+    <target name="all" depends="clean,compile" description="Clean build and dist directories, then compile"/>
     <!-- ==================== Clean Target ==================================== -->
-    <target name="clean"
-   description="Delete old build and dist directories">
+    <target name="clean" description="Delete old build and dist directories">
         <delete dir="${build.home}"/>
         <delete dir="${dist.home}"/>
     </target>
     <!-- ==================== Compile Target ================================== -->
-    <target name="compile" depends="prepare"
-   description="Compile Java sources">
-        <!-- Compile Java classes as necessary -->
-        <mkdir    dir="${build.home}/WEB-INF/classes"/>
-        <javac srcdir="${src.home}"
-          destdir="${build.home}/WEB-INF/classes"
-            debug="${compile.debug}"
-      deprecation="${compile.deprecation}"
-      includeantruntime="false">
+    <target name="compile" depends="prepare" description="Compile Java sources">
+        <mkdir dir="${build.home}/WEB-INF/classes"/>
+        <javac srcdir="${src.home}" destdir="${build.home}/WEB-INF/classes" debug="${compile.debug}" deprecation="${compile.deprecation}" includeantruntime="false">
             <classpath refid="compile.classpath"/>
         </javac>
-        <!-- Copy application resources -->
-        <copy  todir="${build.home}/WEB-INF/classes">
+        <copy todir="${build.home}/WEB-INF/classes">
             <fileset dir="${src.home}" excludes="**/*.java"/>
         </copy>
     </target>
     <!-- ==================== Dist Target ===================================== -->
-    <target name="dist" depends="compile,javadoc"
-   description="Create binary distribution">
-        <!-- Copy documentation subdirectories -->
-        <mkdir   dir="${dist.home}/docs"/>
-        <copy    todir="${dist.home}/docs">
+    <target name="dist" depends="compile,javadoc" description="Create binary distribution">
+        <mkdir dir="${dist.home}/docs"/>
+        <copy todir="${dist.home}/docs">
             <fileset dir="${docs.home}"/>
         </copy>
-        <!-- Create application JAR file -->
-        <jar jarfile="${dist.home}/${app.name}-${app.version}.war"
-         basedir="${build.home}"/>
-        <!-- Copy additional files to ${dist.home} as necessary -->
+        <jar jarfile="${dist.home}/${app.name}-${app.version}.war" basedir="${build.home}"/>
     </target>
     <!-- ==================== Install Target ================================== -->
-    <target name="install" depends="compile"
-   description="Install application to servlet container">
-        <deploy url="${manager.url}"
-       username="${manager.username}"
-       password="${manager.password}"
-           path="${app.path}"
-       localWar="file://${build.home}"/>
+    <target name="install" depends="compile" description="Install application to servlet container">
+        <deploy url="${manager.url}" username="${manager.username}" password="${manager.password}" path="${app.path}" localWar="file://${build.home}"/>
     </target>
     <!-- ==================== Javadoc Target ================================== -->
-    <target name="javadoc" depends="compile"
-   description="Create Javadoc API documentation">
+    <target name="javadoc" depends="compile" description="Create Javadoc API documentation">
         <mkdir          dir="${dist.home}/docs/api"/>
-        <javadoc sourcepath="${src.home}"
-                destdir="${dist.home}/docs/api"
-           packagenames="*">
+        <javadoc sourcepath="${src.home}" destdir="${dist.home}/docs/api" packagenames="*">
             <classpath refid="compile.classpath"/>
         </javadoc>
     </target>
-    <target name="list"
-   description="List installed applications on servlet container">
-        <list    url="${manager.url}"
-        username="${manager.username}"
-        password="${manager.password}"/>
+    <target name="list" description="List installed applications on servlet container">
+        <list url="${manager.url}" username="${manager.username}" password="${manager.password}"/>
     </target>
     <!-- ==================== Prepare Target ================================== -->
     <target name="prepare">
-        <!-- Create build directories as needed -->
-        <mkdir  dir="${build.home}"/>
-        <mkdir  dir="${build.home}/WEB-INF"/>
-        <mkdir  dir="${build.home}/WEB-INF/classes"/>
-        <!-- Copy static content of this web application -->
+        <mkdir dir="${build.home}"/>
+        <mkdir dir="${build.home}/WEB-INF"/>
+        <mkdir dir="${build.home}/WEB-INF/classes"/>
         <copy todir="${build.home}">
             <fileset dir="${web.home}"/>
         </copy>
-        <!-- Copy external dependencies as required -->
-        <!-- *** CUSTOMIZE HERE AS REQUIRED BY YOUR APPLICATION *** -->
-        <mkdir  dir="${build.home}/WEB-INF/lib"/>
+        <mkdir dir="${build.home}/WEB-INF/lib"/>
         <copy todir="${build.home}/WEB-INF/lib" file="${mysql-connector}"/>
-        <!-- Copy static files from external dependencies as needed -->
-        <!-- *** CUSTOMIZE HERE AS REQUIRED BY YOUR APPLICATION *** -->
     </target>
     <!-- ==================== Reload Target =================================== -->
-    <target name="reload" depends="compile"
-   description="Reload application on servlet container">
-        <reload url="${manager.url}"
-       username="${manager.username}"
-       password="${manager.password}"
-           path="${app.path}"/>
+    <target name="reload" depends="compile" description="Reload application on servlet container">
+        <reload url="${manager.url}" username="${manager.username}" password="${manager.password}" path="${app.path}"/>
     </target>
     <!-- ==================== Remove Target =================================== -->
-    <target name="remove"
-   description="Remove application on servlet container">
-        <undeploy url="${manager.url}"
-         username="${manager.username}"
-         password="${manager.password}"
-             path="${app.path}"/>
+    <target name="remove" description="Remove application on servlet container">
+        <undeploy url="${manager.url}" username="${manager.username}" password="${manager.password}" path="${app.path}"/>
     </target>
 </project>
